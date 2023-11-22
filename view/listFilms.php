@@ -10,7 +10,7 @@
 </head>
 <body>
     <a href='index.php'><b>MENU</b></a>
-    <p> Il y a <?= $listFilms->rowCount() ?> films</p>
+    <p> Il y a <?= $requete->rowCount() ?> films</p>
     <table>
         <thead>
             <tr class="column">
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <!-- On fetchAll car un ensemble de résultats est attendu (plusieurs lignes sur HeidiSQL) -> retourne un tableau de tableaux associatifs -->
-            <?php foreach ($listFilms->fetchAll() as $film) { ?>
+            <?php foreach ($requete->fetchAll() as $film) { ?>
                 <tr>
                     <td class="column"><?= $film['titre'] ?></td>
                     <td class="column"><?= $film['dateSortie'] ?></td>

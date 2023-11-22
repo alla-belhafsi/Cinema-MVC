@@ -12,7 +12,7 @@
 <body>
     <h1><?= $titre_secondaire ?></h1>
     <div>
-        <?= $list ?> 
+        <?= $requete ?> 
     </div>
 </body>
 </html>

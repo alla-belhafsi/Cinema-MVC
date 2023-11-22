@@ -13,7 +13,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $listFilms = $pdo->query("
+        $requete = $pdo->query("
         SELECT titre, 
             DATE_FORMAT(film.dateParution, '%Y') AS dateSortie 
         FROM film");
@@ -30,7 +30,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $listActeurs = $pdo->query("
+        $requete = $pdo->query("
         SELECT *
         FROM personne
         INNER JOIN acteur ON personne.id_personne = acteur.id_personne");

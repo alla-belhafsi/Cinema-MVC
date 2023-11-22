@@ -12,7 +12,7 @@
 </head>
 <body>
     <a href='index.php'><b>MENU</b></a>
-    <p> Il y a <?= $listActeurs->rowCount() ?> acteurs/actrices</p>
+    <p> Il y a <?= $requete->rowCount() ?> acteurs/actrices</p>
     <table>
         <thead>
             <tr class="column">
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             <!-- On fetchAll car un ensemble de résultats est attendu (plusieurs lignes sur HeidiSQL) -> retourne un tableau de tableaux associatifs -->
-            <?php foreach ($listActeurs->fetchAll() as $personne) { ?>
+            <?php foreach ($requete->fetchAll() as $personne) { ?>
                 <tr> 
                 <?php 
                 $dateNaissance = $personne["dateNaissance"]; 
