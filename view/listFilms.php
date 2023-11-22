@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/css/style.css">
 
+<!-- On démarre la capture de sortie -->
+<?php ob_start(); ?>
     <title>Liste des films</title>
 </head>
 <body>
@@ -20,10 +22,13 @@
             <?php foreach ($requete->fetchAll() as $film) { ?>
                 <tr>
                     <td class="twoColumns"><?= $film['titre'] ?></td>
-                    <td class="twoColumns"><?= $film['dateParution'] ?></td>
+                    <td class="tableCenter"><?= $film['dateSortie'] ?></td>
                 </tr>
             <?php } ?>
         </tbody>
     </table>
 </body>
 </html>
+ <!-- Récupération du contenu de la capture de sortie dans une variable -->
+<?php $content = ob_get_clean();
+require "view/template.php";
