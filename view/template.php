@@ -10,9 +10,12 @@
     <title><?= $titre ?></title>
 </head>
 <body>
-    <h1><?= $titre_secondaire ?></h1>
     <div>
+        <a href='index.php'><b>MENU</b></a>
+        <h1><?= $titre ?></h1>
+        <p><?= $type ?></p>
         <?= $requete ?> 
+        <?= $liste ?>
     </div>
 </body>
 </html>

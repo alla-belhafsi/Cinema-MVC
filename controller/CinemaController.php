@@ -15,15 +15,13 @@ class CinemaController {
         // On exécute la requête
         $requete = $pdo->query("
         SELECT 
-            film.id_film as id_film,
             film.titre,
             CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
             TIME_FORMAT(SEC_TO_TIME(film.durer*60),'%H:%i') AS dureeHeure,
-            DATE_FORMAT(film.dateParution, '%Y') AS dateParutionFormat
+            DATE_FORMAT(film.dateParution, '%Y') AS dateSortie
         FROM film
-        INNER JOIN realisateur ON film.id_realisateur = realisateur.id_personne
-        INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-        ");
+        INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+        INNER JOIN personne ON realisateur.id_personne = personne.id_personne");
         
         require "view/listFilms.php";
     } 
@@ -40,5 +38,18 @@ class CinemaController {
         INNER JOIN acteur ON personne.id_personne = acteur.id_personne");
 
         require "view/listActeurs.php";
+    }
+
+    public function listRealisateurs() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On exécute la requête
+        $requete = $pdo->query("
+        SELECT*
+        FROM personne
+        INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne");
+
+        require "view/listRealisateurs.php";
     }
 }

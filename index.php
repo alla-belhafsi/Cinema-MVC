@@ -14,6 +14,7 @@ if(isset($_GET["action"])) {
 
         case "listFilms" : $ctrlCinema->listFilms(); break;
         case "listActeurs" : $ctrlCinema->listActeurs(); break;
+        case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
     }
 }
 ?>
@@ -22,10 +23,16 @@ if(isset($_GET["action"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Project Cinema</title>
+
+
+<title>New Project Cinema</title>
 </head>
+
 <body> 
     <a href='index.php?action=listFilms'><b>Les Films</b></a>
     <a href='index.php?action=listActeurs'><b>Les Acteurs</b></a>
+    <a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a>
+
 </body>
 </html>
+
