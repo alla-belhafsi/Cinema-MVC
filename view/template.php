@@ -6,11 +6,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../public/css/style.css">
-    <title>NewProjectCinema</title>
+
+    <title><?= $titre ?></title>
 </head>
 <body>
+    <h1><?= $titre_secondaire ?></h1>
     <div>
-        <?= isset($content) ? $content : '' ?> <!-- Affichage du contenu -->
+        <?= $list ?> 
     </div>
 </body>
 </html>
+

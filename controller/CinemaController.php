@@ -13,11 +13,28 @@ class CinemaController {
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $requete = $pdo->query("
+        $listFilms = $pdo->query("
         SELECT titre, 
             DATE_FORMAT(film.dateParution, '%Y') AS dateSortie 
         FROM film");
         
         require "view/listFilms.php";
+    }
+
+    // CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+    //         DATE_FORMAT(personne.dateNaissance, '%d-%m-%Y') AS dateNaissance
+
+    // Lister les acteurs/actrices
+    public function listActeurs() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On exécute la requête
+        $listActeurs = $pdo->query("
+        SELECT *
+        FROM personne
+        INNER JOIN acteur ON personne.id_personne = acteur.id_personne");
+
+        require "view/listActeurs.php";
     }
 }
