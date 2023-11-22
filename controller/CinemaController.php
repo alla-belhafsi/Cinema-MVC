@@ -14,16 +14,20 @@ class CinemaController {
 
         // On exécute la requête
         $requete = $pdo->query("
-        SELECT titre, 
-            DATE_FORMAT(film.dateParution, '%Y') AS dateSortie 
-        FROM film");
+        SELECT 
+            film.id_film as id_film,
+            film.titre,
+            CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
+            TIME_FORMAT(SEC_TO_TIME(film.durer*60),'%H:%i') AS dureeHeure,
+            DATE_FORMAT(film.dateParution, '%Y') AS dateParutionFormat
+        FROM film
+        INNER JOIN realisateur ON film.id_realisateur = realisateur.id_personne
+        INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+        ");
         
         require "view/listFilms.php";
-    }
-
-    // CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
-    //         DATE_FORMAT(personne.dateNaissance, '%d-%m-%Y') AS dateNaissance
-
+    } 
+        
     // Lister les acteurs/actrices
     public function listActeurs() {
         // On se connecte

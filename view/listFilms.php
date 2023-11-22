@@ -15,6 +15,8 @@
         <thead>
             <tr class="column">
                 <th class="column">Titre</th>
+                <th class="column">Réalisateur</th>
+                <th class="column">Durée</th>
                 <th class="column">Date de Sortie</th>
             </tr>
         </thead>
@@ -23,7 +25,9 @@
             <?php foreach ($requete->fetchAll() as $film) { ?>
                 <tr>
                     <td class="column"><?= $film['titre'] ?></td>
-                    <td class="column"><?= $film['dateSortie'] ?></td>
+                    <td class="column"><?= $film['realisateur'] ?></td>
+                    <td class="tableCenter"><?= $film['dureeHeure'] ?></td>
+                    <td class="tableCenter"><?= $film['dateParutionFormat'] ?></td>
                 </tr>
             <?php } ?>
         </tbody>
