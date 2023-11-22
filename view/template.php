@@ -10,7 +10,7 @@
 </head>
 <body>
     <div>
-        <?=$listFilms?>
+        <?= isset($content) ? $content : '' ?> <!-- Affichage du contenu -->
     </div>
 </body>
 </html>
