@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Controller\CinemaController;
 
@@ -24,20 +24,31 @@ if(isset($_GET["action"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<?php ob_start(); ?>
 
-<title>New Project Cinema</title>
+<div></div>
+</head>
+<body>
+    <div></div>
+</body>
+<?php
 
-<div>
+$navbar = "";
+
+$titre = "Application Cinema";
+
+$type = "";
+
+$liste = "
    <a href='index.php?action=listFilms'><b>Les Films</b></a>
    <a href='index.php?action=listActeurs'><b>Les Acteurs</b></a>
-   <a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a> 
-</div>
+   <a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a>
+";
 
-</head>
-    
-<body> 
-    
+$requete = ob_get_clean();
 
-</body>
+require_once "view/template.php";
+?>   
+
 </html>
 

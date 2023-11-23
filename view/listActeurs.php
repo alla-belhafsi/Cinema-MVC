@@ -7,7 +7,12 @@
 
 </head>
 <body>
-<?php ob_start(); 
+<?php ob_start();
+
+$navbar = "
+<a href='index.php'><b>MENU</b></a>
+<a href='index.php?action=listFilms'><b>Les Films</b></a>
+<a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a>";
 
 $titre = "La liste des acteurs et actrices";
 

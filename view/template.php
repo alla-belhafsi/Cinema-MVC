@@ -6,7 +6,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../public/css/style.css">
-
+    <div><?= $navbar ?></div>
     <title><?= $titre ?></title>
     <div>
     
@@ -14,7 +14,6 @@
 </head>
 <body>
     <div>
-        <a href='index.php'><b>MENU</b></a>
         <h1><?= $titre ?></h1>
         <p><?= $type ?></p>
         <?= $requete ?> 
