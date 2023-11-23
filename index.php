@@ -54,16 +54,24 @@ require_once "view/template.php";
     </div>
     <ul class="menu-list">
         <li style="--i:1;--clr:#1877f2">
-            <a href='index.php?action=listRealisateurs'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
+            <span class="icon-container">
+                <a href='index.php?action=listRealisateurs'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
+            </span>
         </li>
         <li style="--i:2;--clr:#1877f2">
-            <a href='index.php?action=listActeurs'><ion-icon name="star-outline"></ion-icon></ion-icon>Acteurs</a>
+            <span class="icon-container">
+                <a href='index.php?action=listActeurs'><ion-icon name="star-outline" class="icon"></ion-icon></ion-icon>Acteurs</a>
+            </span>
         </li>
         <li style="--i:3;--clr:#1877f2">
-            <a href='index.php?action=listFilms'><ion-icon name="film-outline"></ion-icon>Films</a>
+            <span class="icon-container">
+                <a href='index.php?action=listFilms'><ion-icon name="film-outline"></ion-icon>Films</a>
+            </span>
         </li>
         <li style="--i:4;--clr:#1877f2">
-            <a href='index.php?action=listRealisateurs'><ion-icon name="people-outline"></ion-icon></ion-icon>Réalisateurs</a>
+            <span class="icon-container">
+                <a href='index.php?action=listRealisateurs'><ion-icon name="people-outline"></ion-icon></ion-icon>Réalisateurs</a>
+            </span>
         </li>
     </ul>
     
