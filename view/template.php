@@ -20,7 +20,7 @@
         <p><?= $type ?></p>
         <?= $requete ?> 
         <?= $liste ?>
-        <script src="../public/js/script.js"></script>
+        <script src="public/js/script.js"></script>
     </div>
 </body>
 </html>

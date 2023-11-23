@@ -41,40 +41,31 @@ $titre = "Application Cinema";
 $type = "";
 
 $liste = "";
-
+?>
+<div class="menu">
+    <div class="toggle" id="toggle">
+        <span href="#"><ion-icon name="eye-outline"></ion-icon></span>
+    </div>
+    <ul class="menu-list">
+        <li id="icon-container1" style="--i:1;--clr:#1877f2">
+            <a href='index.php?action=listRealisateurs'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
+        </li>
+        <li id="icon-container1" style="--i:2;--clr:#1877f2">
+            <a href='index.php?action=listActeurs'><ion-icon name="star-outline" class="icon"></ion-icon></ion-icon>Acteurs</a>
+        </li>
+        <li id="icon-container1" style="--i:3;--clr:#1877f2">
+            <a href='index.php?action=listFilms'><ion-icon name="film-outline"></ion-icon>Films</a>
+        </li>
+        <li id="icon-container1" style="--i:4;--clr:#1877f2">
+            <a href='index.php?action=listRealisateurs'><ion-icon name="people-outline"></ion-icon></ion-icon>Réalisateurs</a>
+        </li>
+    </ul>
+</div>
+<?php
 $requete = ob_get_clean();
 
 require_once "view/template.php";
 ?>   
 
 </html>
-<div class="menu">
-    <div class="toggle">
-        <span href="#"><ion-icon name="eye-outline"></ion-icon></span>
-    </div>
-    <ul class="menu-list">
-        <li style="--i:1;--clr:#1877f2">
-            <span class="icon-container">
-                <a href='index.php?action=listRealisateurs'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
-            </span>
-        </li>
-        <li style="--i:2;--clr:#1877f2">
-            <span class="icon-container">
-                <a href='index.php?action=listActeurs'><ion-icon name="star-outline" class="icon"></ion-icon></ion-icon>Acteurs</a>
-            </span>
-        </li>
-        <li style="--i:3;--clr:#1877f2">
-            <span class="icon-container">
-                <a href='index.php?action=listFilms'><ion-icon name="film-outline"></ion-icon>Films</a>
-            </span>
-        </li>
-        <li style="--i:4;--clr:#1877f2">
-            <span class="icon-container">
-                <a href='index.php?action=listRealisateurs'><ion-icon name="people-outline"></ion-icon></ion-icon>Réalisateurs</a>
-            </span>
-        </li>
-    </ul>
-    
-</div>
-
 
