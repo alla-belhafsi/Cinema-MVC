@@ -1,3 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Oswald", sans-serif;
+    
+}
+
+.container {
+    background-color: #616161;
+}
+
+.title {
+    color: #ae2727;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0px 0px 74px;
+}
+
+/*==============================NAVBAR================================*/
+
+.menu {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.menu .toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    height: 60px;
+    width: 60px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 5;
+    transition: 1.25s;
+}
+
+
+.menu ul.menu-list {
+    list-style: none; /* Supprimer les puces des listes */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column; /* Affichage vertical des liens */
+    align-items: center; /* Alignement des éléments au centre */
+}
+
+
+
+.menu ul.menu-list li {
+    width: 74px; /* Largeur de chaque élément li */
+    height: 74px; /* Hauteur de chaque élément li */
+    border-radius: 50%; /* Forme circulaire */
+    background-color: #fff; /* Couleur de fond */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform-origin: top left;
+    transform: rotate(calc(var(--i) * 90deg)) translate(140px) rotate(calc(-1 * var(--i) * 90deg));
+    
+}
+
+.menu ul.menu-list li a {
+    text-decoration: none;
+    color: #333; /* Couleur du texte */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    font-size: 0.74rem;
+}
+
+.menu ul.menu-list li a ion-icon {
+    width: 100%;
+    font-size: 2rem; /* Taille de l'icône */
+}
+
+
+
+
+
+/*==============================TABLE================================*/
 .column {
     border: 1px solid #000;
     padding: 5px;

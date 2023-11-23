@@ -10,11 +10,6 @@
 <body>
 <?php ob_start();
 
-$navbar = "
-<a href='index.php'><b>MENU</b></a>
-<a href='index.php?action=listActeurs'><b>Les Acteurs</b></a>
-<a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a>";
-
 $titre = "La liste des films";
 
 $type = "<p> Il y a ".$requete->rowCount()." Films</p>";
