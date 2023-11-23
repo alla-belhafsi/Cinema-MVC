@@ -45,16 +45,17 @@
     width: 60px;
     background-color: #9c3d3d;
     border-radius: 50%;
-    color: #fff;
+    color: #C49C5F;
     font-size: 2rem;
     cursor: pointer;
     transition: 0.74s;
+    mix-blend-mode: luminosity;
     z-index: 1;
 }
 .eye:hover {
     background-color: #741717;
     border: 3px solid black;
-    color: #470000;
+    color: #C49C5F;
     transform: scale(1.20);
 }
 
