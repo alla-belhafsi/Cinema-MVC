@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="../public/css/style.css">
 
     <title><?= $titre ?></title>
+    <div>
+    
+    </div>
 </head>
 <body>
     <div>

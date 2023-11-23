@@ -21,7 +21,8 @@ class CinemaController {
             DATE_FORMAT(film.dateParution, '%Y') AS dateSortie
         FROM film
         INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
-        INNER JOIN personne ON realisateur.id_personne = personne.id_personne");
+        INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+        ORDER BY film.dateParution DESC;");
         
         require "view/listFilms.php";
     } 
@@ -33,9 +34,13 @@ class CinemaController {
 
         // On exécute la requête
         $requete = $pdo->query("
-        SELECT *
+        SELECT
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+            DATE_FORMAT(personne.dateNaissance, '%d-%m-%Y') AS dateNaissance,
+            personne.sexe
         FROM personne
-        INNER JOIN acteur ON personne.id_personne = acteur.id_personne");
+        INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+        ORDER BY personne.dateNaissance DESC");
 
         require "view/listActeurs.php";
     }
@@ -46,9 +51,13 @@ class CinemaController {
 
         // On exécute la requête
         $requete = $pdo->query("
-        SELECT*
+        SELECT
+            CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
+            DATE_FORMAT(personne.dateNaissance, '%d-%m-%Y') AS dateNaissance,
+            personne.sexe
         FROM personne
-        INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne");
+        INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
+        ORDER BY personne.dateNaissance ASC;");
 
         require "view/listRealisateurs.php";
     }

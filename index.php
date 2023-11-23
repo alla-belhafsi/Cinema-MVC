@@ -26,12 +26,17 @@ if(isset($_GET["action"])) {
 
 
 <title>New Project Cinema</title>
-</head>
 
+<div>
+   <a href='index.php?action=listFilms'><b>Les Films</b></a>
+   <a href='index.php?action=listActeurs'><b>Les Acteurs</b></a>
+   <a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a> 
+</div>
+
+</head>
+    
 <body> 
-    <a href='index.php?action=listFilms'><b>Les Films</b></a>
-    <a href='index.php?action=listActeurs'><b>Les Acteurs</b></a>
-    <a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a>
+    
 
 </body>
 </html>
