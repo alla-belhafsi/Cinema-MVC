@@ -14,7 +14,7 @@
 }
 
 .title {
-    color: #ae2727;
+    color: #741717;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -43,15 +43,14 @@
     z-index: 1;
     height: 60px;
     width: 60px;
-    background: #fff;
+    background: #9c3d3d;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
+    color: #fff;
     font-size: 2rem;
     cursor: pointer;
-    z-index: 5;
     transition: 1.25s;
 }
 
@@ -62,8 +61,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: space-around;
     flex-direction: column; /* Affichage vertical des liens */
