@@ -35,7 +35,7 @@
     width: 100%;
 }
 
-.toggle {
+.eye {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,81 +51,64 @@
     transition: 0.74s;
     z-index: 1;
 }
-.toggle:hover {
+.eye:hover {
     background-color: #741717;
+    border: 3px solid black;
+    color: #470000;
     transform: scale(1.20);
-}
-
-#icon-container1 {
-    background-color: #9c3d3d;
-    transition: 1.25s;
-}
-#icon-container1:hover a  {
-    color: #000;
 }
 
 
 .menu ul.menu-list {
     list-style: none; /* Supprimer les puces des listes */
     position: absolute;
-    /* top: 50%;
-    left: 50%; */
     display: flex;
     justify-content: center;
-    flex-direction: column; /* Affichage vertical des liens */
-    align-items: center; /* Alignement des éléments au centre */
+    flex-direction: column; 
+    align-items: center; 
 }
 
-.toggle.active ul.menu-list li {
+.eye.active ul.menu-list li {
     background-color: #741717;
-    transform: scale(0.5) rotate(360deg);
-    transition: 1.25s;
 }
-
 .menu ul.menu-list li {
-    width: 74px; /* Largeur de chaque élément li */
-    height: 74px; /* Hauteur de chaque élément li */
+    width: 74px; 
+    height: 74px; 
     border-radius: 50%; /* Forme circulaire */
-    background-color: #9c3d3d; /* Couleur de fond */
+    background-color: #9c3d3d; 
     display: flex;
     overflow: hidden;
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: rotate(calc(var(--i) * 90deg)) translate(140px) rotate(calc(-1 * var(--i) * 90deg));
-    /* transition: transform 4s ease-in-out; */
+    transform: rotate(720deg) scale(0.1);
+    transition: transform 1.33s ease-in-out; 
+    
 }
-.menu .toggle.active ~ ul.menu-list li {
-    transform: rotate(360deg) scale(0.1); /* Transformation pour les icônes */
-    /* transition: transform 4s ease-in-out; */
-}
-
-.menu .toggle.active ~ ul.menu-list li:nth-child(1) {
-    transition-delay: 1.25s;
-    transform-origin: center center ;
-}
-.menu .toggle.active ~ ul.menu-list li:nth-child(2) {
-    transition-delay: 2.5s;
+.menu .eye.active ~ ul.menu-list li {
+    transform: rotate(calc(var(--i) * 90deg)) translate(140px) rotate(calc(-1 * var(--i) * 90deg)) rotate(720deg) scale(1.0); /* Transformation pour les icônes */
     transform-origin: center center;
 }
-.menu .toggle.active ~ ul.menu-list li:nth-child(3) {
-    transition-delay: 3.75s;
-    transform-origin: center center;
-}
-.menu .toggle.active ~ ul.menu-list li:nth-child(4) {
-    transition-delay: 4.0s;
-    transform-origin: center center;
-}
-/* ... Répétez pour chaque élément de la liste, en augmentant la valeur de transition-delay pour chaque nouvel élément */
 
 .menu ul.menu-list li a {
     text-decoration: none;
-    color: #333; /* Couleur du texte */
+    color: #333; 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
+    height: 74px;
     font-size: 0.74rem;
+    transition: color 1.25s;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.menu ul.menu-list li a:hover {
+    color: black;
+    border: 3px solid black;
+    
 }
 
 .menu ul.menu-list li a ion-icon {

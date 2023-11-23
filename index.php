@@ -43,20 +43,20 @@ $type = "";
 $liste = "";
 ?>
 <div class="menu">
-    <div class="toggle" id="toggle">
+    <div class="eye" id="toggle">
         <span href="#"><ion-icon name="eye-outline"></ion-icon></span>
     </div>
     <ul class="menu-list">
-        <li id="icon-container1" style="--i:1;--clr:#1877f2">
+        <li class="icon" style="--i:1;--clr:#1877f2">
             <a href='index.php?action=listRealisateurs'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
         </li>
-        <li id="icon-container1" style="--i:2;--clr:#1877f2">
+        <li class="icon" style="--i:2;--clr:#1877f2">
             <a href='index.php?action=listActeurs'><ion-icon name="star-outline" class="icon"></ion-icon></ion-icon>Acteurs</a>
         </li>
-        <li id="icon-container1" style="--i:3;--clr:#1877f2">
+        <li class="icon" style="--i:3;--clr:#1877f2">
             <a href='index.php?action=listFilms'><ion-icon name="film-outline"></ion-icon>Films</a>
         </li>
-        <li id="icon-container1" style="--i:4;--clr:#1877f2">
+        <li class="icon" style="--i:4;--clr:#1877f2">
             <a href='index.php?action=listRealisateurs'><ion-icon name="people-outline"></ion-icon></ion-icon>Réalisateurs</a>
         </li>
     </ul>
