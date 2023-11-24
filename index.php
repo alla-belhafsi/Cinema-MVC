@@ -15,6 +15,7 @@ if(isset($_GET["action"])) {
         case "listFilms" : $ctrlCinema->listFilms(); break;
         case "listActeurs" : $ctrlCinema->listActeurs(); break;
         case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
+        case "casting" : $ctrlCinema->casting(); break;
     }
 }
 ?>
@@ -48,7 +49,7 @@ $liste = "";
     </div>
     <ul class="menu-list">
         <li class="icon" style="--i:1;--clr:#1877f2">
-            <a href='index.php?action=listRealisateurs'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
+            <a href='index.php?action=casting'><ion-icon name="videocam-outline"></ion-icon>Castings</a>
         </li>
         <li class="icon" style="--i:2;--clr:#1877f2">
             <a href='index.php?action=listActeurs'><ion-icon name="star-outline" class="icon"></ion-icon></ion-icon>Acteurs</a>

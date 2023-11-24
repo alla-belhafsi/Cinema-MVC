@@ -16,7 +16,7 @@ $navbar = "
 
 $titre = "La liste des acteurs et actrices";
 
-$type = "<p> Il y a ".$requete->rowCount()." acteurs et actrices</p>";
+$type = "<p> Il y a <b>".$requeteLA->rowCount()."</b> acteurs et actrices<br><br></p>";
 
 $liste = "
 <table>
@@ -28,7 +28,7 @@ $liste = "
             </tr>
         </thead>
         <tbody>";
-            foreach ($requete->fetchAll() as $personne) { 
+            foreach ($requeteLA->fetchAll() as $personne) { 
                 $liste .=
                 "<tr>
                     <td class='column'>".$personne["acteur"]."</td>

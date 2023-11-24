@@ -13,7 +13,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $requete = $pdo->query("
+        $requeteLF = $pdo->query("
         SELECT 
             film.titre,
             CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
@@ -33,7 +33,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $requete = $pdo->query("
+        $requeteLA = $pdo->query("
         SELECT
             CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
             DATE_FORMAT(personne.dateNaissance, '%d-%m-%Y') AS dateNaissance,
@@ -44,13 +44,14 @@ class CinemaController {
 
         require "view/listActeurs.php";
     }
-
+    
+    // Lister les Réalisateurs/Réalisatrices
     public function listRealisateurs() {
         // On se connecte
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $requete = $pdo->query("
+        $requeteLR = $pdo->query("
         SELECT
             CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
             DATE_FORMAT(personne.dateNaissance, '%d-%m-%Y') AS dateNaissance,
@@ -60,5 +61,57 @@ class CinemaController {
         ORDER BY personne.dateNaissance ASC;");
 
         require "view/listRealisateurs.php";
+    }
+
+    public function casting() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On excécute la première requête titre ============================
+        $requeteFilm = $pdo->prepare("
+        SELECT 
+            film.titre AS titre, 
+            film.note AS note,
+            DATE_FORMAT(film.dateParution, '%Y') AS anneeSortie,
+            TIME_FORMAT(SEC_TO_TIME(film.durer*60),'%H:%i') AS dureeFilm
+        FROM film
+        WHERE film.id_film = 2");// ne renvoie qu'une seule ligne
+
+        $requeteFilm->execute();
+
+        // Récupération du titre du film
+        $film = $requeteFilm->fetch();
+        
+        // On exécute la deuxième requête Réalisateur =======================
+        $requeteRealisateur = $pdo->query("
+        SELECT
+            CONCAT(personne.prenom, ' ', personne.nom) AS realisateur
+        FROM personne
+        INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
+        INNER JOIN film ON realisateur.id_realisateur = film.id_realisateur
+        WHERE film.id_film = 2");// ne renvoie qu'une seule ligne
+
+        $requeteRealisateur->execute();
+
+        // Récupération de l'identité du Réalisateur
+        $realisateur = $requeteRealisateur->fetch();
+
+        // On exécute la troisième requête acteur et role ==================
+        $requeteCasting = $pdo->prepare("
+        SELECT 
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+            role.nom AS role,
+            personne.sexe AS sexe
+        FROM casting
+        INNER JOIN film ON casting.id_film = film.id_film
+        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        INNER JOIN role ON casting.id_role = role.id_role
+        WHERE film.id_film = 2");// renvoie potentiellement plusieurs lignes
+
+        $requeteCasting->execute();
+
+
+        require "view/casting.php";
     }
 }

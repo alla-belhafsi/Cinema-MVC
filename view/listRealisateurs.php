@@ -12,7 +12,7 @@
 
 $titre = "La liste des réalisateurs et réalisatrices";
 
-$type = "<p> Il y a ".$requete->rowCount()." réalisateurs et réalisatrices</p>";
+$type = "<p> Il y a <b>".$requeteLR->rowCount()."</b> réalisateurs et réalisatrices<br><br></p>";
 
 $liste = "
 <table>
@@ -24,7 +24,7 @@ $liste = "
         </tr>
         </thead>
         <tbody>";
-            foreach ($requete->fetchAll() as $personne) { 
+            foreach ($requeteLR->fetchAll() as $personne) { 
                 $liste .=
                 "<tr> 
                     <td class='column'>".$personne['realisateur']."</td>

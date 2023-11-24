@@ -132,3 +132,11 @@
     border: 1px solid #000;
     text-align: center;
 }
+
+/*================================CASTING========================================*/
+
+/* "<span class='etoile active' style='width:" . ($decimal * 100) . "%;'>&#9733;</span>" */
+
+.etoile {
+    
+}
