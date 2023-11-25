@@ -9,22 +9,21 @@
 </head>
 <body>
 <?php ob_start();
-    
 $titre = "Casting";
 $type = "";
 $liste = ""; // Initialisation de la variable $liste
-echo $film['titre'] . "<br>"; // Ajout du titre du film à la liste
+echo "<a href='index.php?action=casting&id=" . $film['id_film'] . "'>".$film['titre']."</a><br>";
 echo "Durée : ".$film['dureeFilm'] . "<br>";
-echo "Réalisateur : ".$realisateur['realisateur'] . "<br>";
+echo "Réalisateur : <a href='index.php?action=listRealisateurs&id=" . $film['id_realisateur'] . "'>".$realisateur['realisateur']."</a><br>";
 echo "Année de sortie : ".$film['anneeSortie'] . "<br>";
 echo "Note : " . afficherEtoiles($film['note']) . "<br>";
-echo "Acteur et son rôle :<br>";
-foreach ($requeteCasting->fetchAll() as $casting) {
-    echo $casting['acteur'] . " dans le rôle de " . $casting['role'] . "<br>"; // Ajout des détails du casting à la liste
+echo "<br>Acteur et son rôle :<br>";
+foreach ($requeteRole->fetchAll() as $roles) {
+    echo $roles['acteur'] . " dans le rôle de " . $roles['role'] . "<br>";
 }
+echo "<br>Synopsis :<br>".$film['synopsis'];
 
 echo $liste; // Affichage de la liste complète
-
 
 
 $requete = ob_get_clean();

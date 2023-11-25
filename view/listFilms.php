@@ -26,7 +26,7 @@ $liste = "
         foreach ($requeteLF->fetchAll() as $film) { 
             $liste .= "
             <tr>
-                <td class='column'>".$film['titre']."</td>
+                <td class='column'><a href='index.php?action=casting&id=".$film['id_film']."'>".$film['titre']."</a><br></td>
                 <td class='column'>".$film['realisateur']."</td>
                 <td class='tableCenter'>".$film['dureeHeure']."</td>
                 <td class='tableCenter'>".$film['dateSortie']."</td>

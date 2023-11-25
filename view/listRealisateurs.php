@@ -14,26 +14,33 @@ $titre = "La liste des réalisateurs et réalisatrices";
 
 $type = "<p> Il y a <b>".$requeteLR->rowCount()."</b> réalisateurs et réalisatrices<br><br></p>";
 
-$liste = "
-<table>
-    <thead>
-        <tr class='column'>
-            <th class='column'>Réalisateur</th>
-            <th class='column'>Date de Naissance</th>
-            <th class='column'>SEXE</th>
-        </tr>
-        </thead>
-        <tbody>";
-            foreach ($requeteLR->fetchAll() as $personne) { 
-                $liste .=
-                "<tr> 
-                    <td class='column'>".$personne['realisateur']."</td>
-                    <td class='tableCenter'>".$personne['dateNaissance']."</td>
-                    <td class='tableCenter'>".$personne['sexe']."</td>
-                </tr>";
-            }
+$liste = '<table>'; // Initialise la variable pour la liste des réalisateurs
+
+
+$liste .= '
+<thead>
+    <tr>
+        <th>Nom du réalisateur</th>
+        <th>Date de naissance</th>
+        <th>Sexe</th>
+    </tr>
+</thead>
+<tbody>';
+
+
+foreach ($requeteLR->fetchAll() as $realisateur) { 
+    
+        $liste .=
+            "<tr>
+                <td class='column'><a href='index.php?action=casting&id=".$realisateur['id_realisateur']."'>".$realisateur['realisateur']."</a></td>
+                <td class='tableCenter'>". date('d-m-Y', strtotime($realisateur['dateNaissance'])) ."</td>
+
+                <td class='tableCenter'>".$realisateur['sexe']."</td>
+            </tr>";
+}
 $liste .= "</tbody>
 </table>";
+
 
 $requete = ob_get_clean();
 
