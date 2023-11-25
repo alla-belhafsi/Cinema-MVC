@@ -25,7 +25,7 @@
 /*==============================NAVBAR================================*/
 
 .menu {
-    position: relative;
+    position: fixed;
     width: 280px;
     height: 280px;
     display: flex;
@@ -58,7 +58,6 @@
     color: #C49C5F;
     transform: scale(1.20);
 }
-
 
 .menu ul.menu-list {
     list-style: none; /* Supprimer les puces des listes */

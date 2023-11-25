@@ -24,7 +24,7 @@
     </div>
     <ul class='menu-list'>
         <li class='icon' style='--i:1;--clr:#1877f2'>
-            <a href='index.php?action=casting'><ion-icon name='videocam-outline'></ion-icon>Castings</a>
+            <a href='index.php'><ion-icon name='videocam-outline'></ion-icon>Home</a>
         </li>
         <li class='icon' style='--i:2;--clr:#1877f2'>
             <a href='index.php?action=listActeurs'><ion-icon name='star-outline' class='icon'></ion-icon></ion-icon>Acteurs</a>
