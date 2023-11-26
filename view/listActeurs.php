@@ -4,22 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/css/style.css">
-
 </head>
-<body>
+<body class="container2">
 <?php ob_start();
 
-// $navbar = "
-// <a href='index.php'><b>MENU</b></a>
-// <a href='index.php?action=listFilms'><b>Les Films</b></a>
-// <a href='index.php?action=listRealisateurs'><b>Les Réalisateurs</b></a>";
+$navbar = "
+<nav class='navbar'>
+    <h1 class='leftNav'><a href='index.php'>CINEFYLE</a></h1>
+    <mid class='midNav'>
+        <ul class=midMidNav'>
+            <a href='index.php?action=listFilms'>FILMS</a>
+            <a href='index.php?action=listActeurs'>ACTEURS</a>
+            <a href='index.php?action=listRealisateurs'>RÉALISATEURS</a>
+            <a href='#'>RÔLES</a>
+        </ul>
+    </mid>
+    <right class='rightNav'>
+        <ul class='rightRightNav'>
+            <i class='fa-brands fa-twitter' style='color: #C49C5F;'></i>
+            <i class='fa-brands fa-facebook-f' style='color: #C49C5F;'></i>
+            <i class='fa-brands fa-instagram' style='color: #C49C5F;'></i>
+        </ul>
+    </right>    
+</nav>
+";
 
-$titre = "La liste des acteurs et actrices";
+$titre = "<div class='title'>La liste des acteurs et actrices</div>";
 
-$type = "<p> Il y a <b>".$requeteLA->rowCount()."</b> acteurs et actrices<br><br></p>";
+$compteur = "<p class= 'counter'> Il y a <b>".$requeteLA->rowCount()."</b> acteurs et actrices<br><br></p>";
 
 $liste = "
-<table>
+<table class='table'>
         <thead>
             <tr class='column'>
                 <th class='column'>Acteur</th>

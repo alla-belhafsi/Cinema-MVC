@@ -1,27 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Dancing+Script:wght@700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Oswald", sans-serif;
-    
+    font-family: "Agbalumo", sans-serif;    
 }
 
 .container {
-    background-color: #616161;
+    background-color: #343434;
+}
+.container2 {
+    background-color: #741717;
 }
 
 .title {
     color: #741717;
+    -webkit-text-stroke: 0.47px #C49C5F; /* Contour des lettres de 2 px de couleur noire */
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 100%;
-    margin: 0px 0px 74px;
+    padding: 100px 0px 20px;
 }
-
+.titreHome {
+    color: #741717;
+    -webkit-text-stroke: 0.47px #C49C5F; /* Contour des lettres de 2 px de couleur noire */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+.counter {
+    text-align: center;
+}
 /*==============================NAVBAR================================*/
 
 .menu {
@@ -32,7 +44,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    top: 0;
+    z-index: 3;
     width: 100%;
+    margin-top: 133px;
 }
 
 .eye {
@@ -43,23 +58,31 @@
     left: 50%;
     height: 60px;
     width: 60px;
-    background-color: #9c3d3d;
+    background-color: #575757;
     border-radius: 50%;
-    color: #C49C5F;
+    border: 0.47px solid #C49C5F;
+    color: #000;
     font-size: 2rem;
     cursor: pointer;
     transition: 0.74s;
     mix-blend-mode: luminosity;
+    margin-bottom: -3px;
     z-index: 1;
 }
 .eye:hover {
     background-color: #741717;
-    border: 3px solid black;
     color: #C49C5F;
     transform: scale(1.20);
 }
+.eye.active .menu-list li {
+    background-color: #741717;
+}
+.eye.active ~ .menu-list li {
+    transform: rotate(calc(var(--i) * 90deg)) translate(140px) rotate(calc(-1 * var(--i) * 90deg)) rotate(720deg) scale(1.0); /* Transformation pour les icônes */
+    transform-origin: center center;
+}
 
-.menu ul.menu-list {
+.menu-list {
     list-style: none; /* Supprimer les puces des listes */
     position: absolute;
     display: flex;
@@ -68,12 +91,10 @@
     align-items: center; 
 }
 
-.eye.active ul.menu-list li {
-    background-color: #741717;
-}
-.menu ul.menu-list li {
-    width: 74px; 
-    height: 74px; 
+
+.icon {
+    width: 88px; 
+    height: 88px; 
     border-radius: 50%; /* Forme circulaire */
     background-color: #9c3d3d; 
     display: flex;
@@ -81,18 +102,20 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: rotate(720deg) scale(0.1);
-    transition: transform 1.33s ease-in-out; 
-    
+    cursor: pointer;
+    transform: rotate(720deg) scale(0.1); /* rotation et dezoom */
+    transition: transform 1.33s ease-in-out;  
 }
-.menu .eye.active ~ ul.menu-list li {
-    transform: rotate(calc(var(--i) * 90deg)) translate(140px) rotate(calc(-1 * var(--i) * 90deg)) rotate(720deg) scale(1.0); /* Transformation pour les icônes */
-    transform-origin: center center;
+.icon:hover {
+    border: 0.47px solid #C49C5F;
+}
+.icon:hover + .iconContent {
+    color: #C49C5F;
 }
 
-.menu ul.menu-list li a {
+.iconContent {
     text-decoration: none;
-    color: #333; 
+    color: #000; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,41 +124,162 @@
     width: 100%;
     height: 74px;
     font-size: 0.74rem;
-    transition: color 1.25s;
+    margin-bottom: 7px;
+    transition: color 1.25s transform 1.25s ease-in-out;
     border-radius: 50%;
     box-sizing: border-box;
 }
-.menu ul.menu-list li a:hover {
-    color: black;
-    border: 3px solid black;
-    
+.icon a:hover {
+    color: #C49C5F;
 }
 
-.menu ul.menu-list li a ion-icon {
+#iconReal a ion-icon {
+    margin-bottom: -4px;
+}
+.iconContent ion-icon {
     width: 100%;
     font-size: 2rem; /* Taille de l'icône */
 }
 
 
+/*=============================NAVBAR================================*/
 
+/*=============== LEFT NAVBAR ================*/
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;/* La navbar occupe la largeur complète de son conteneur parent */
+    position: fixed;/* La navbar est fixée en haut de la fenêtre, reste visible lors du défilement */
+    top: 0;/* La navbar est positionnée au sommet de la fenêtre */
+    z-index: 3;/* L'index z définit la pile d'affichage*/
+    background: rgba(0, 0, 0, 0.5);
+}
+.navbar h1 {
+    cursor: default;
+    color: #C49C5F;
+    margin: 0px 50px;
+}
+.navbar h1 a {
+    text-decoration: none;
+    color: #C49C5F;
+    opacity: 1;
+    transition: 0.47s;
+}
+.navbar h1 a:hover {
+    opacity: 0.4;
+} 
 
+/*=============== MIDDLE NAVBAR ================*/
+
+.midNav {
+    display: flex;
+    list-style: none;
+    padding: 26px 30px;
+    gap: 20px;
+}
+.midNav a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #C49C5F;
+    opacity: 1;
+    transition: 0.47s;
+    margin-right: 20px;
+}
+.midNav a:last-child {
+    margin-right: 0;
+}
+.midNav a:hover {
+    opacity: 0.4;
+}
+.midMidNav {
+    display: flex;
+    justify-content: space-around;
+}
+.midMidNav a {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/*=============== RIGHT NAVBAR ================*/
+
+.rightRightNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 0px 50px;
+}
+.rightNav i  {
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.47s;
+}
+.rightNav i:hover {
+    opacity: 0.4;
+}
 
 
 /*==============================TABLE================================*/
+
+.table {
+    width: 100%;
+    padding: 0px 74px; 
+}
 .column {
     border: 1px solid #000;
     padding: 5px;
+    border-radius: 4px;
+}
+#selectCase:hover {
+    border: 1px solid #C49C5F;
+}
+.columna {
+    color: #000;
+    text-decoration: none;
+}
+.columna:hover {
+    color: #C49C5F;
 }
 .tableCenter {
     border: 1px solid #000;
     text-align: center;
 }
 
+
+
+
+
 /*================================CASTING========================================*/
 
 /* "<span class='etoile active' style='width:" . ($decimal * 100) . "%;'>&#9733;</span>" */
 
-.etoile {
+/* .etoile {
     
+} */
+
+
+/* =============== MOBILE VERSION ===================== */
+
+@media screen and (max-width: 640px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Agbalumo", sans-serif;    
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .midNav {
+        padding: 5px 30px 15px;
+    }
 }

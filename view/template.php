@@ -4,44 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/style.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     
-    <title><?= $titre ?></title>
     <div>
-        
+        <title><?= $titre ?></title>
     </div>
 </head>
-<body>
-<div>
-    <h1 class="title"><?= $titre ?></h1>
-<div>
-<div class='menu'>
-    <div class='eye' id='toggle'>
-        <span href='#'><ion-icon name='eye-outline'></ion-icon></span>
+<body class="body">
+    <div>
+        <?= $navbar ?>
     </div>
-    <ul class='menu-list'>
-        <li class='icon' style='--i:1;--clr:#1877f2'>
-            <a href='index.php'><ion-icon name='videocam-outline'></ion-icon>Home</a>
-        </li>
-        <li class='icon' style='--i:2;--clr:#1877f2'>
-            <a href='index.php?action=listActeurs'><ion-icon name='star-outline' class='icon'></ion-icon></ion-icon>Acteurs</a>
-        </li>
-        <li class='icon' style='--i:3;--clr:#1877f2'>
-            <a href='index.php?action=listFilms'><ion-icon name='film-outline'></ion-icon>Films</a>
-        </li>
-        <li class='icon' style='--i:4;--clr:#1877f2'>
-            <a href='index.php?action=listRealisateurs'><ion-icon name='people-outline'></ion-icon></ion-icon>Réalisateurs</a>
-        </li>
-    </ul>
-</div>
-        </div>
-        <p><?= $type ?></p>
-        <?= $requete ?> 
+    <div>
+        <h1><?= $titre ?></h1>
+    <div>
+    <div>
+        <p><?= $compteur ?></p>
+    </div>
+    <div>
+        <?= $requete ?>
+    </div>
+    <div>
         <?= $liste ?>
+    </div>
+    <div>
         <script src="public/js/script.js"></script>
     </div>
 </body>
 </html>
+<!-- name='videocam-outline' -->
