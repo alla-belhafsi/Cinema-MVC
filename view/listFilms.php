@@ -36,11 +36,11 @@ $compteur = "<p class= 'counter'> Il y a <b>".$requeteLF->rowCount()."</b> Films
 $liste = "
 <table class='table'>
     <thead>
-        <tr class='column'>
-            <th class='column'>Titre</th>
-            <th class='column'>Réalisateur</th>
-            <th class='column'>Durée</th>
-            <th class='column'>Date de Sortie</th>
+        <tr>
+            <th>Titre</th>
+            <th>Réalisateur</th>
+            <th>Durée</th>
+            <th>Date de Sortie</th>
         </tr>
     </thead>
     <tbody>";

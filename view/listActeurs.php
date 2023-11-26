@@ -36,10 +36,10 @@ $compteur = "<p class= 'counter'> Il y a <b>".$requeteLA->rowCount()."</b> acteu
 $liste = "
 <table class='table'>
         <thead>
-            <tr class='column'>
-                <th class='column'>Acteur</th>
-                <th class='column'>Date de Naissance</th>
-                <th class='column'>SEXE</th>
+            <tr>
+                <th>Acteur</th>
+                <th>Date de Naissance</th>
+                <th>SEXE</th>
             </tr>
         </thead>
         <tbody>";
