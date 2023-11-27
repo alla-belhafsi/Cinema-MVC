@@ -18,13 +18,18 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
-
+        
         case "listFilms" : $ctrlFilm->listFilms($id); break;
         case "listActeurs" : $ctrlActeur->listActeurs($id); break;
+        case "listFilmographie" : $ctrlActeur->listFilmographie($id); break;
         case "listRealisateurs" : $ctrlCinema->listRealisateurs($id); break;
         case "casting" : $ctrlCinema->casting($id); break;
     }
 }
+?>
+
+<?php ob_start(); 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,49 +38,18 @@ if(isset($_GET["action"])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="public/css/style.css">
     </head>
-    <body>
-        <?php ob_start();
+<title><?= $tabTitle ?></title>
+<body>
 
-$background = "
-<div class='home-background'>
-    <img src='public/img/Home-background.jpg' alt='background-image'>
-</div>
-";
-
-$titre = "";
-?>
-<?php
-$compteur = "";
-
-$navbar = "
-<div class='menu'>
-<div class='eye' id='toggle'>
-<span href='#'><ion-icon name='eye-outline'></ion-icon></span>
-</div>
-<ul class='menu-list'>
-<li class='icon' style='--i:1;--clr:#1877f2'>
-<a class='iconContent' href='index.php'><ion-icon name='home-outline'></ion-icon>Home</a>
-</li>
-<li class='icon' style='--i:2;--clr:#1877f2'>
-<a class='iconContent' href='index.php?action=listActeurs'><ion-icon name='star-outline' ></ion-icon>Acteurs</a>
-</li>
-<li class='icon' style='--i:3;--clr:#1877f2'>
-<a class='iconContent' href='index.php?action=listFilms'><ion-icon name='film-outline'></ion-icon>Films</a>
-</li>
-<li class='icon' id='iconReal' style='--i:4;--clr:#1877f2'>
-<a class='iconContent' href='index.php?action=listRealisateurs'><ion-icon name='videocam-outline'></ion-icon>Réalisateurs</a>
-</li>
-</ul>
-</div>
-";
-
-$type = "";
-
-
-$liste = "";
-
-$requete = ob_get_clean();
-require_once "view/template.php";
-?>   
 </body>
 </html>
+
+<?php
+// Afficher le Menu d'icônes et le fond d'écran seulement à la Page d'accueil
+$showIconMenu = true;
+
+// Afficher le titre de l'onglet
+$tabTitle = "CINEFYLE";
+
+$query = ob_get_clean();
+require_once "view/template.php";

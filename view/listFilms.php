@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,36 +7,17 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body class="container2">
-<?php ob_start();
+<?php
 
-$background = "";
+$showIconMenu = false;
 
-$navbar = "
-<nav class='navbar'>
-    <h1 class='leftNav'><a href='index.php'>CINEFYLE</a></h1>
-    <mid class='midNav'>
-        <ul class=midMidNav'>
-            <a href='index.php?action=listFilms'>FILMS</a>
-            <a href='index.php?action=listActeurs'>ACTEURS</a>
-            <a href='index.php?action=listRealisateurs'>RÉALISATEURS</a>
-            <a href='#'>RÔLES</a>
-        </ul>
-    </mid>
-    <right class='rightNav'>
-        <ul class='rightRightNav'>
-            <i class='fa-brands fa-twitter' style='color: #C49C5F;'></i>
-            <i class='fa-brands fa-facebook-f' style='color: #C49C5F;'></i>
-            <i class='fa-brands fa-instagram' style='color: #C49C5F;'></i>
-        </ul>
-    </right>    
-</nav>
-";
+$tabTitle = "Films";
 
-$titre = "<div class='title'>La liste des Films</div>";
+$title = "<div class='title'>La liste des Films</div>";
 
-$compteur = "<p class= 'counter'> Il y a <b>".$requeteLF->rowCount()."</b> Films<br><br></p>";
+$counter = "<p class= 'counter'> Il y a <b>".$requeteLF->rowCount()."</b> Films<br><br></p>";
 
-$liste = "
+$list = "
 <table class='table'>
     <thead>
         <tr>
@@ -47,7 +29,7 @@ $liste = "
     </thead>
     <tbody>";
         foreach ($requeteLF->fetchAll() as $film) { 
-            $liste .= "
+            $list .= "
             <tr>
                 <td class='column' id='selectCase'><a class='columna' href='index.php?action=casting&id=".$film['id_film']."'>".$film['titre']."</a><br></td>
                 <td class='column' id='selectCase'>".$film['realisateur']."</td>
@@ -55,11 +37,10 @@ $liste = "
                 <td class='tableCenter'>".$film['dateSortie']."</td>
             </tr>";
         }
-$liste .= "</tbody>
+$list .= "</tbody>
 </table>";
 
-$requete = ob_get_clean();
-
+$query = ob_get_clean();
 require_once "template.php";
 ?>
 </body>
