@@ -9,6 +9,8 @@
 <body class="container2">
 <?php ob_start();
 
+$background = "";
+
 $navbar = "
 <nav class='navbar'>
     <h1 class='leftNav'><a href='index.php'>CINEFYLE</a></h1>

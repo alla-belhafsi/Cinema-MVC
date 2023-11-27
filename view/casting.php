@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
-<body class="container2">
+<body>
 <?php ob_start();
 
-$navbarOne = "";
+$background = "
+<div class='home-background'>
+    <img src='public/img/Home-background.jpg' alt='background-image'>
+</div>
+";
 
 $navbar = "
 <nav class='navbar'>
@@ -37,19 +41,21 @@ $titre = "<div class='title'>Casting</div>";
 
 $compteur = "";
 
-$liste = ""; // Initialisation de la variable $liste
-echo "<a class='columna' href='index.php?action=casting&id=" . $film['id_film'] . "'>".$film['titre']."</a><br>";
-echo "Durée : ".$film['dureeFilm'] . "<br>";
-echo "Réalisateur : <a class='columna' href='index.php?action=listRealisateurs&id=" . $film['id_realisateur'] . "'>".$realisateur['realisateur']."</a><br>";
-echo "Année de sortie : ".$film['anneeSortie'] . "<br>";
-echo "Note : " . afficherEtoiles($film['note']) . "<br>";
-echo "<br>Acteur et son rôle :<br>";
-foreach ($requeteRole->fetchAll() as $roles) {
-    echo $roles['acteur'] . " dans le rôle de " . $roles['role'] . "<br>";
-}
-echo "<br>Synopsis :<br>".$film['synopsis'];
+$liste = "
+<a class='columna' href='index.php?action=casting&id=" . $film['id_film'] . "'>".$film['titre']."</a><br>
+<p>Durée : ".$film['dureeFilm'] . "</p>
+<p>Réalisateur : <a class='columna' href='index.php?action=listRealisateurs&id=" . $film['id_realisateur'] . "'>".$realisateur['realisateur']."</a></p>
+<p>Année de sortie : ".$film['anneeSortie'] . "</p>
+<p>Note : " . afficherEtoiles($film['note']) . "</p><br>
+<p>Acteur et son rôle : </p>";
 
-echo $liste; // Affichage de la $liste complète
+foreach ($requeteRole->fetchAll() as $roles) {
+    $liste .= "<p>" . $roles['acteur'] . " dans le rôle de " . $roles['role'] . "</p>";
+}
+
+$liste .= "<br><p>Synopsis :</p><p>" . $film['synopsis'] . "</p>";
+
+
 
 $requete = ob_get_clean();
 

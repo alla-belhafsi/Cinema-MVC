@@ -7,16 +7,30 @@
     font-family: "Agbalumo", sans-serif;    
 }
 
-.container {
-    background-color: #343434;
-}
+/* .container {
+    background-color: #741717;
+} */
 .container2 {
     background-color: #741717;
+}
+.home-background {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Utilisation de la hauteur de la fenêtre pour l'image de fond */
+    overflow: hidden; /* Cache toute partie dépassant de la zone visible */
+}
+.home-background img {
+    width: 100%; /* L'image de fond prend toute la largeur de son conteneur */
+    height: 100%; /* L'image de fond prend toute la longeur de son conteneur */
+    object-fit: cover; /* Redimensionne l'image pour remplir complètement le conteneur */
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .title {
     color: #741717;
-    -webkit-text-stroke: 0.47px #C49C5F; /* Contour des lettres de 2 px de couleur noire */
+    -webkit-text-stroke: 0.47px #C49C5F; /* Contour des lettres */
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -37,7 +51,7 @@
 /*==============================NAVBAR================================*/
 
 .menu {
-    position: fixed;
+    position: absolute;
     width: 280px;
     height: 280px;
     display: flex;
@@ -47,7 +61,7 @@
     top: 0;
     z-index: 3;
     width: 100%;
-    margin-top: 133px;
+    margin-top: 47px;
 }
 
 .eye {
@@ -58,10 +72,10 @@
     left: 50%;
     height: 60px;
     width: 60px;
-    background-color: #575757;
+    background-color: #741717;
     border-radius: 50%;
     border: 0.47px solid #C49C5F;
-    color: #000;
+    color: #fff;
     font-size: 2rem;
     cursor: pointer;
     transition: 0.74s;
@@ -70,7 +84,7 @@
     z-index: 1;
 }
 .eye:hover {
-    background-color: #741717;
+    background-color: #575757;
     color: #C49C5F;
     transform: scale(1.20);
 }
@@ -236,8 +250,9 @@
     padding: 5px;
     border-radius: 4px;
 }
-#selectCase:hover {
+#selectCase:hover + .columna {
     border: 1px solid #C49C5F;
+    color: #C49C5F;
 }
 .columna {
     color: #000;
@@ -264,6 +279,7 @@
 } */
 
 
+
 /* =============== MOBILE VERSION ===================== */
 
 @media screen and (max-width: 640px) {
@@ -281,5 +297,8 @@
     }
     .midNav {
         padding: 5px 30px 15px;
+    }
+    .rightRightNav {
+        margin: 0px 50px 10px;
     }
 }

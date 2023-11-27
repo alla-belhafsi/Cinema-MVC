@@ -28,16 +28,23 @@ if(isset($_GET["action"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head >
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/style.css">
-</head>
-<body class="container">
-<?php ob_start();
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="public/css/style.css">
+    </head>
+    <body>
+        <?php ob_start();
 
-$titre = "<div class='titreHome'>CINEFYLE</div>";
+$background = "
+<div class='home-background'>
+    <img src='public/img/Home-background.jpg' alt='background-image'>
+</div>
+";
 
+$titre = "";
+?>
+<?php
 $compteur = "";
 
 $navbar = "
@@ -64,10 +71,10 @@ $navbar = "
 
 $type = "";
 
+
 $liste = "";
 
 $requete = ob_get_clean();
-
 require_once "view/template.php";
 ?>   
 </body>

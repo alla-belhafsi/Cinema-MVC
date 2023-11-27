@@ -15,7 +15,10 @@
         <title><?= $titre ?></title>
     </div>
 </head>
-<body class="body">
+<body>
+    <div>
+        <?= $background ?>
+    </div>
     <div>
         <?= $navbar ?>
     </div>
