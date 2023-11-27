@@ -30,7 +30,7 @@ $list = "
             foreach ($requeteLA->fetchAll() as $personne) { 
                 $list .=
                 "<tr>
-                    <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographie&id=".$personne['id_acteur']."'>".$personne['acteur']."</a><br></td>
+                    <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographieA&id=".$personne['id_acteur']."'>".$personne['acteur']."</a><br></td>
                     <td class='tableCenter'>".$personne['dateNaissance']."</td>
                     <td class='tableCenter'>".$personne["sexe"]."</td>
                 </tr>";

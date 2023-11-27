@@ -27,12 +27,12 @@ class ActeurController {
     }
 
     // Lister les filmographies
-    public function listFilmographie($id) {
+    public function listFilmographieA($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
 
         // On exécute la requête
-        $requeteFG = $pdo->prepare("
+        $requeteFGA = $pdo->prepare("
         SELECT 
             film.titre AS film,
             CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
@@ -47,9 +47,9 @@ class ActeurController {
         ");// ne renvoie qu'une seule ligne
 
         // Liaison du paramètre :id_film et exécution de la requête
-        $requeteFG->bindParam(':id_acteur', $id);
-        $requeteFG->execute();
+        $requeteFGA->bindParam(':id_acteur', $id);
+        $requeteFGA->execute();
 
-        require "view/listFilmographie.php";
+        require "view/listFilmographieA.php";
     }
 }

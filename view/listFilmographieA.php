@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <?php foreach ($requeteFG->fetchAll() as $castings) { ?>
+    <?php foreach ($requeteFGA->fetchAll() as $castings) { ?>
         <div class="content">
             <h2><a class='columna' href='index.php?action=casting&id=<?= $castings['id_film'] ?>'><?= $castings['film'] ?></a></h2>
             <p>Dans le rôle de <?= $castings['role'] ?></p>
             <p>Année de sortie : <?= $castings['dateSortie'] ?><br><br></p>
         </div>
-   <?php } ?>   
+    <?php } ?>   
 
 <?php
           
@@ -21,7 +21,7 @@ $showIconMenu = false;
 
 $tabTitle = "Filmographie";
 
-$title = "<div class='title'>Filmographie</div>";
+$title = "<div class='title'>Filmographie de ".$castings['acteur']."</div>";
 
 $counter = "";
 

@@ -33,7 +33,7 @@ $list .= "
 foreach ($requeteLR->fetchAll() as $realisateur) { 
     $list .="
     <tr>
-        <td class='column'><a class='columna' href='index.php?action=casting&id=".$realisateur['id_realisateur']."'>".$realisateur['realisateur']."</a></td>
+        <td class='column'><a class='columna' href='index.php?action=listFilmographieR&id=".$realisateur['id_realisateur']."'>".$realisateur['realisateur']."</a></td>
         <td class='tableCenter'>". date('d-m-Y', strtotime($realisateur['dateNaissance'])) ."</td>
         <td class='tableCenter'>".$realisateur['sexe']."</td>
     </tr>";

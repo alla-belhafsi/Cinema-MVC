@@ -94,4 +94,38 @@ class CinemaController {
 
         require "view/casting.php";
     }
+
+    // Lister les filmographies
+    public function listFilmographieR($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On exécute la requête
+        $requeteFGR = $pdo->prepare("
+        SELECT 
+            film.id_film AS id_film,
+            film.titre AS film,
+            TIME_FORMAT(SEC_TO_TIME(film.durer*60),'%H:%i') AS dureeFilm,
+            CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
+            DATE_FORMAT(film.dateParution, '%Y') AS dateSortie,
+            GROUP_CONCAT(DISTINCT genres_film.libelle SEPARATOR ' - ') AS genres
+        FROM film
+        INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+        INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+        INNER JOIN (
+            SELECT 
+                id_film,
+                genre.libelle
+                FROM posseder
+        INNER JOIN genre ON posseder.id_genre = genre.id_genre) AS genres_film ON film.id_film = genres_film.id_film
+        WHERE realisateur.id_realisateur = :id_realisateur
+        GROUP BY film.id_film
+        ");// ne renvoie qu'une seule ligne
+
+        // Liaison du paramètre :id_film et exécution de la requête
+        $requeteFGR->bindParam(':id_realisateur', $id);
+        $requeteFGR->execute();
+
+        require "view/listFilmographieR.php";
+    }
 }
