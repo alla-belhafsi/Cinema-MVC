@@ -128,4 +128,54 @@ class CinemaController {
 
         require "view/listFilmographieR.php";
     }
+
+    public function UDRealisateurs($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+    
+        // Récupération des données actuelles du réalisateur
+        $requeteIR = $pdo->prepare("
+        SELECT 
+            prenom, 
+            nom, 
+            dateNaissance, 
+            sexe,
+            realisateur.id_realisateur
+        FROM personne
+        INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
+        WHERE id_realisateur = :id_realisateur
+        ");
+        $requeteIR->bindParam(':id_realisateur', $id);
+        $requeteIR->execute();
+        $IR = $requeteIR->fetch();
+    
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier'])) {
+            // Récupération des données du formulaire
+            $IR['id_personne'] = $_GET['id'];
+            $IR['prenom'] = $_POST['prenom'];
+            $IR['nom'] = $_POST['nom'];
+            $IR['dateNaissance'] = $_POST['dateNaissance'];
+            $IR['sexe'] = $_POST['sexe'];
+    
+            // Exécution de la requête de mise à jour
+            $requeteUR = $pdo->prepare("UPDATE personne
+            SET 
+              prenom = :prenom, 
+              nom = :nom, 
+              dateNaissance = :dateNaissance,
+              sexe = :sexe
+            WHERE id_personne = :id_personne");
+            $requeteUR->bindParam(':prenom', $IR['prenom']);
+            $requeteUR->bindParam(':nom', $IR['nom']);
+            $requeteUR->bindParam(':dateNaissance', $IR['dateNaissance']);
+            $requeteUR->bindParam(':sexe', $IR['sexe']);
+            $requeteUR->bindParam(':id_personne', $id);
+            $requeteUR->execute();
+    
+            // Redirection vers la page de confirmation
+            require "view/confirmation.php";
+        }
+    
+        require "view/UDRealisateurs.php";
+    }
 }

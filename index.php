@@ -19,11 +19,14 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
         
-        case "listFilms" : $ctrlFilm->listFilms($id); break;
-        case "listActeurs" : $ctrlActeur->listActeurs($id); break;
+        case "listFilms" : $ctrlFilm->listFilms(); break;
+        case "listActeurs" : $ctrlActeur->listActeurs(); break;
         case "listFilmographieA" : $ctrlActeur->listFilmographieA($id); break;
         case "listFilmographieR" : $ctrlCinema->listFilmographieR($id); break;
-        case "listRealisateurs" : $ctrlCinema->listRealisateurs($id); break;
+        case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
+        case "infosRealisateur" : $ctrlCinema->infosRealisateur($id); break;
+        case "UDRealisateurs" : $ctrlCinema->UDRealisateurs($id); break;
+        case "confirmation" : $ctrlCinema->confirmation(); break;
         case "casting" : $ctrlCinema->casting($id); break;
     }
 }

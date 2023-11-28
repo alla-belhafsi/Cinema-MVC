@@ -42,7 +42,7 @@ foreach ($requeteLR->fetchAll() as $realisateur) {
             ".$realisateur['sexe']."
         </td>
         <td class='tableCenterUD'>
-            <a class='columna' href='index.php?action=updateRealisateur&id=".$realisateur['id_realisateur']."'>
+            <a class='columna' href='index.php?action=UDRealisateurs&id=".$realisateur['id_realisateur']."'>
                 <ion-icon name='settings-outline'></ion-icon>
             </a>
         </td>
