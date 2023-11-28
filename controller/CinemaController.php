@@ -151,25 +151,30 @@ class CinemaController {
     
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier'])) {
             // Récupération des données du formulaire
-            $IR['id_personne'] = $_GET['id'];
+            $IR['id_realisateur'] = $_GET['id'];
             $IR['prenom'] = $_POST['prenom'];
             $IR['nom'] = $_POST['nom'];
             $IR['dateNaissance'] = $_POST['dateNaissance'];
             $IR['sexe'] = $_POST['sexe'];
-    
+
             // Exécution de la requête de mise à jour
-            $requeteUR = $pdo->prepare("UPDATE personne
+            $requeteUR = $pdo->prepare("
+            UPDATE personne
+            INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
             SET 
               prenom = :prenom, 
               nom = :nom, 
               dateNaissance = :dateNaissance,
               sexe = :sexe
-            WHERE id_personne = :id_personne");
+            WHERE id_realisateur = :id_realisateur
+            ");
+
+            // Liaison des paramètres pour la mise à jour 
             $requeteUR->bindParam(':prenom', $IR['prenom']);
             $requeteUR->bindParam(':nom', $IR['nom']);
             $requeteUR->bindParam(':dateNaissance', $IR['dateNaissance']);
             $requeteUR->bindParam(':sexe', $IR['sexe']);
-            $requeteUR->bindParam(':id_personne', $id);
+            $requeteUR->bindParam(':id_realisateur', $id);
             $requeteUR->execute();
     
             // Redirection vers la page de confirmation
