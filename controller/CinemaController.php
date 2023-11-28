@@ -120,9 +120,9 @@ class CinemaController {
         INNER JOIN genre ON posseder.id_genre = genre.id_genre) AS genres_film ON film.id_film = genres_film.id_film
         WHERE realisateur.id_realisateur = :id_realisateur
         GROUP BY film.id_film
-        ");// ne renvoie qu'une seule ligne
+        ");// // renvoie potentiellement plusieurs lignes
 
-        // Liaison du paramètre :id_film et exécution de la requête
+        // Liaison du paramètre :id_realisateur et exécution de la requête
         $requeteFGR->bindParam(':id_realisateur', $id);
         $requeteFGR->execute();
 
