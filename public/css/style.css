@@ -258,17 +258,16 @@
 
 .table {
     width: 100%;
-    padding: 0px 74px; 
+    padding: 0px 74px 47px;
 }
 .column {
     border: 1px solid #000;
     padding: 5px;
     border-radius: 4px;
 }
-#selectCase:hover + .columna {
+/* #selectCase:hover {
     border: 1px solid #C49C5F;
-    color: #C49C5F;
-}
+} */
 .columna {
     color: #000;
     text-decoration: none;
@@ -276,8 +275,26 @@
 .columna:hover {
     color: #C49C5F;
 }
+.columna ion-icon {
+    color: #C49C5F;
+    width: 100%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0px 12px;
+    margin-top: 5px;
+    transition: 1s;
+}
+.columna ion-icon:hover {
+    transform: scale(1.2);
+}
 .tableCenter {
     border: 1px solid #000;
+    border-radius: 4px;
+    text-align: center;
+    cursor: default;
+}
+.tableCenterUD {
+    border: none;
     text-align: center;
 }
 
