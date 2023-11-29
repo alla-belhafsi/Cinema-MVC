@@ -1,4 +1,7 @@
-<?php ob_start(); ?>
+<?php ob_start(); 
+
+$FGR = $requeteFGR->fetchAll(); // Stocker les détails des films dans une variable séparée
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,7 +10,7 @@
         <link rel="stylesheet" href="public/css/style.css">
     </head>
     <body>
-        <?php foreach ($requeteFGR->fetchAll() as $films) { ?>
+        <?php foreach ($FGR as $films) { ?>
             <div class="content">
                 <h2><a class='columna' href='index.php?action=casting&id=<?= $films['id_film'] ?>'><?= $films['film'] ?></a></h2>
                 <p>Genre : <?= $films['genres'] ?></p>

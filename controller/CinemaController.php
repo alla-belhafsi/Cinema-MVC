@@ -118,10 +118,10 @@ class CinemaController {
                 id_film,
                 genre.libelle
                 FROM posseder
-        INNER JOIN genre ON posseder.id_genre = genre.id_genre) AS genres_film ON film.id_film = genres_film.id_film
-        WHERE realisateur.id_realisateur = :id_realisateur
-        GROUP BY film.id_film
-        ");// // renvoie potentiellement plusieurs lignes
+            INNER JOIN genre ON posseder.id_genre = genre.id_genre) AS genres_film ON film.id_film = genres_film.id_film
+            WHERE realisateur.id_realisateur = :id_realisateur
+            GROUP BY film.id_film
+            ");// // renvoie potentiellement plusieurs lignes
 
         // Liaison du paramètre :id_realisateur et exécution de la requête
         $requeteFGR->bindParam('id_realisateur', $id);
@@ -158,22 +158,6 @@ class CinemaController {
     public function UARealisateur($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
-    
-        // // Récupération des données actuelles du réalisateur
-        // $requeteIR = $pdo->prepare("
-        // SELECT 
-        //     prenom, 
-        //     nom, 
-        //     dateNaissance, 
-        //     sexe,
-        //     realisateur.id_realisateur
-        // FROM personne
-        // INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
-        // WHERE id_realisateur = :id_realisateur
-        // ");
-        // $requeteIR->bindParam('id_realisateur', $id);
-        // $requeteIR->execute();
-        // $IR = $requeteIR->fetch();
     
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier'])) {
             // Sanitize les données du formulaire avant de les utiliser

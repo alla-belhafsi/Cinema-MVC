@@ -32,7 +32,7 @@ $list = "
             $list .= "
             <tr>
                 <td class='column' id='selectCase'><a class='columna' href='index.php?action=casting&id=".$film['id_film']."'>".$film['titre']."</a><br></td>
-                <td class='column' id='selectCase'>".$film['realisateur']."</td>
+                <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographieR&id=".$film['id_realisateur']."'>".$film['realisateur']."</a><br></td>
                 <td class='tableCenter'>".$film['dureeHeure']."</td>
                 <td class='tableCenter'>".$film['dateSortie']."</td>
             </tr>";
