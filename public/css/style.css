@@ -132,7 +132,7 @@
     position: absolute;
     cursor: pointer;
     transform: rotate(720deg) scale(0.1); /* rotation et dezoom */
-    transition: transform 1.33s ease-in-out;  
+    transition: transform 1s ease-in-out;  
 }
 .icon:hover {
     border: 0.47px solid #C49C5F;

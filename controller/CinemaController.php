@@ -180,6 +180,48 @@ class CinemaController {
             // Redirection vers la page de confirmation
             require "view/confirmation.php";
         }
+        elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
+            // Suppression des enregistrements liés avec la clé étrangère FK__film dans la table posseder
+            $requeteDeletePosseder = $pdo->prepare("
+            DELETE 
+            FROM posseder
+            WHERE id_film IN (
+                SELECT id_film
+                FROM film
+            WHERE id_realisateur = :id_realisateur)
+            ");
+
+            // Liaison du paramètre et exécution de la requête de suppression des enregistrements liés
+            $requeteDeletePosseder->bindParam(':id_realisateur', $id);
+            $requeteDeletePosseder->execute();
+
+            // Suppression des enregistrements liés avec la clé étrangère FK_film_realisateur dans la table film
+            $requeteDeleteFilms = $pdo->prepare("
+            DELETE FROM film
+            WHERE id_realisateur = :id_realisateur
+            ");
+
+            // Liaison du paramètre et exécution de la requête de suppression des films associés
+            $requeteDeleteFilms->bindParam(':id_realisateur', $id);
+            $requeteDeleteFilms->execute();
+
+            // Suppression du réalisateur et des informations associées
+            $requeteDR = $pdo->prepare("
+            DELETE 
+                realisateur, 
+                personne 
+            FROM realisateur
+            INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+            WHERE realisateur.id_realisateur = :id_realisateur
+            ");
+    
+            // Liaison du paramètre et exécution de la requête de suppression
+            $requeteDR->bindParam(':id_realisateur', $id);
+            $requeteDR->execute();
+    
+            // Redirection vers la page de confirmation
+            require "view/confirmation.php";
+        }
     
         require "view/UDRealisateurs.php";
     }

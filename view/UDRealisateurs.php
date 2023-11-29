@@ -27,6 +27,8 @@
         <input type="text" id="sexe" name="sexe" value="<?= $IR['sexe'] ?>"><br><br>
         
         <input type="submit" name= "modifier" value="Modifier">
+
+        <input type="submit" name= "supprimer" value="Supprimer">
         <!-- <a class='columna' href="index.php?action=UDRealisateurs&id="$id>
             <ion-icon name='settings-outline'></ion-icon>
         </a> -->
