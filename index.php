@@ -22,19 +22,18 @@ if(isset($_GET["action"])) {
         case "listFilms" : $ctrlFilm->listFilms(); break;
         case "listActeurs" : $ctrlActeur->listActeurs(); break;
         case "listFilmographieA" : $ctrlActeur->listFilmographieA($id); break;
-        case "listFilmographieR" : $ctrlCinema->listFilmographieR($id); break;
+        case "formActeur" : $ctrlActeur->formActeur($id); break;
         case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
-        case "infosRealisateur" : $ctrlCinema->infosRealisateur($id); break;
-        case "UDRealisateurs" : $ctrlCinema->UDRealisateurs($id); break;
+        case "listFilmographieR" : $ctrlCinema->listFilmographieR($id); break;
+        case "formRealisateur" : $ctrlCinema->formRealisateur($id); break;
+        case "UARealisateur" : $ctrlCinema->UARealisateur($id); break;
         case "confirmation" : $ctrlCinema->confirmation(); break;
         case "casting" : $ctrlCinema->casting($id); break;
     }
 }
 ?>
 
-<?php ob_start(); 
-
-?>
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

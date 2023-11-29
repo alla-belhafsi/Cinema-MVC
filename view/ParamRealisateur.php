@@ -12,7 +12,7 @@
     <h1>Modifier un réalisateur</h1><br>
     
     <!-- Formulaire prérempli pour la modification -->
-    <form action="index.php?action=UDRealisateurs&id=<?= $id ?>" method="POST">
+    <form action="index.php?action=UARealisateur&id=<?= $id ?>" method="POST">
         
         <label for="prenom">Prénom :</label>
         <input type="text" id="prenom" name="prenom" value="<?= $IR['prenom'] ?>"><br><br>
@@ -27,15 +27,13 @@
         <input type="text" id="sexe" name="sexe" value="<?= $IR['sexe'] ?>"><br><br>
         
         <input type="submit" name= "modifier" value="Modifier">
-
-        <input type="submit" name= "supprimer" value="Supprimer">
-        <!-- <a class='columna' href="index.php?action=UDRealisateurs&id="$id>
-            <ion-icon name='settings-outline'></ion-icon>
-        </a> -->
         
     </form>
-    <?php
-// Récupérez les données à afficher
+    
+    <input type="submit" name= "supprimer" value="Supprimer">
+
+<?php
+
 $showIconMenu = false;
 
 $tabTitle = "Paramètres du réalisateur";

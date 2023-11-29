@@ -34,6 +34,7 @@ class ActeurController {
         // On exécute la requête
         $requeteFGA = $pdo->prepare("
         SELECT 
+            film.id_film AS id_film,
             film.titre AS film,
             CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
             role.nom AS role,
@@ -47,9 +48,73 @@ class ActeurController {
         ");// ne renvoie qu'une seule ligne
 
         // Liaison du paramètre :id_film et exécution de la requête
-        $requeteFGA->bindParam(':id_acteur', $id);
+        $requeteFGA->bindParam('id_acteur', $id);
         $requeteFGA->execute();
 
         require "view/listFilmographieA.php";
+    }
+
+    public function formActeur($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+    
+        // Récupération des données actuelles du réalisateur
+        $requeteIA = $pdo->prepare("
+        SELECT 
+            prenom, 
+            nom, 
+            dateNaissance, 
+            sexe,
+            acteur.id_acteur
+        FROM personne
+        INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+        WHERE id_acteur = :id_acteur
+        ");
+        $requeteIA->bindParam('id_acteur', $id);
+        $requeteIA->execute();
+        $IA = $requeteIA->fetch();
+
+        // Redirection vers la page des paramètres du réalisateur
+        require "view/ParamRealisateur.php";
+    }
+
+    // Modification ou ajout d'un acteur dans la BDD (UPDATE & ADD)
+    public function UAActeurs($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier'])) {
+            // Sanitize les données du formulaire avant de les utiliser
+            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance = filter_input(INPUT_POST, 'dateNaissance', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, 'sexe', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // Exécution de la requête de mise à jour
+            $requeteUA = $pdo->prepare("
+            UPDATE personne
+            INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+            SET 
+              prenom = :prenom, 
+              nom = :nom, 
+              dateNaissance = :dateNaissance,
+              sexe = :sexe
+            WHERE id_acteur = :id_acteur
+            ");
+
+            // Liaison des paramètres pour la mise à jour 
+            $requeteUA->bindParam('prenom', $prenom);
+            $requeteUA->bindParam('nom', $nom);
+            $requeteUA->bindParam('dateNaissance', $dateNaissance);
+            $requeteUA->bindParam('sexe', $sexe);
+            $requeteUA->bindParam('id_acteur', $id);
+            $requeteUA->execute();
+    
+            // Redirection vers la page de confirmation
+            require "view/confirmation.php";
+        }
+        
+        // Redirection vers la page des paramètres du réalisateur
+        require "view/ParamRealisateur.php";
     }
 }

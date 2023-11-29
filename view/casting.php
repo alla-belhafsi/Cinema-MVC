@@ -12,7 +12,7 @@ ob_start(); ?>
         <div class="content">
             <h2><a class='columna' href='index.php?action=casting&id=<?= $film['id_film'] ?>'><?= $film['titre'] ?></a></h2>
             <p>Durée : <?= $film['dureeFilm'] ?></p>
-            <p>Réalisateur : <a class='columna' href='index.php?action=listRealisateurs&id=<?= $film['id_realisateur'] ?>'><?= $realisateur['realisateur'] ?></a></p>
+            <p>Réalisateur : <a class='columna' href='index.php?action=listFilmographieR&id=<?= $film['id_realisateur'] ?>'><?= $realisateur['realisateur'] ?></a></p>
             <p>Année de sortie : <?= $film['anneeSortie'] ?></p>
             <p>Note : <?= afficherEtoiles($film['note']) ?></p>
         </div>
@@ -20,7 +20,7 @@ ob_start(); ?>
         <div class="content">
             <p>Acteur et son rôle :</p>
             <?php foreach ($requeteRole as $roles) { ?>
-                <p><?= $roles['acteur'] ?> dans le rôle de <?= $roles['role'] ?></p>
+                <p><a class='columna' href='index.php?action=listFilmographieA&id=<?= $roles['id_acteur'] ?>'><?= $roles['acteur'] ?></a> dans le rôle de <?= $roles['role'] ?></p>
             <?php } ?>
         </div>
         
