@@ -26,6 +26,26 @@ class ActeurController {
         require "view/listActeurs.php";
     }
 
+    // Lister les rôles
+    public function roles() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On exécute la requête
+        $requeteRA = $pdo->query("
+        SELECT DISTINCT
+            acteur.id_acteur AS id_acteur, 
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+            role.nom AS role
+        FROM casting
+        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        INNER JOIN role ON casting.id_role = role.id_role
+        ");
+
+        require "view/roles.php";
+    }
+
     // Lister les filmographies
     public function listFilmographieA($id) {
         // On se connecte
@@ -75,11 +95,11 @@ class ActeurController {
         $IA = $requeteIA->fetch();
 
         // Redirection vers la page des paramètres du réalisateur
-        require "view/ParamRealisateur.php";
+        require "view/ParamActeur.php";
     }
 
     // Modification ou ajout d'un acteur dans la BDD (UPDATE & ADD)
-    public function UAActeurs($id) {
+    public function UAActeur($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
 
@@ -115,6 +135,6 @@ class ActeurController {
         }
         
         // Redirection vers la page des paramètres du réalisateur
-        require "view/ParamRealisateur.php";
+        require "view/ParamActeur.php";
     }
 }

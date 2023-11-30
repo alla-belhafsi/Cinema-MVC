@@ -33,6 +33,11 @@ $list = "
                     <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographieA&id=".$personne['id_acteur']."'>".$personne['acteur']."</a><br></td>
                     <td class='tableCenter'>".$personne['dateNaissance']."</td>
                     <td class='tableCenter'>".$personne["sexe"]."</td>
+                    <td class='tableCenterUD'>
+                        <a class='columna' href='index.php?action=formActeur&id=".$personne['id_acteur']."'>
+                            <ion-icon name='settings-outline'></ion-icon>
+                        </a>
+                    </td>
                 </tr>";
             } 
 $list .= "</tbody>

@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
@@ -21,16 +21,16 @@
                 <span href='#'><ion-icon name='eye-outline'></ion-icon></span>
             </div>
             <ul class='menu-list'>
-                <li class='icon' style='--i:1;--clr:#1877f2'>
-                    <a class='iconContent' href='index.php'><ion-icon name='home-outline'></ion-icon>Home</a>
+                <li class='icon'  style='--i:1;--'>
+                    <a class='iconContent' href='index.php?action=roles'><ion-icon id='iconMask' class="fa-solid fa-masks-theater"></ion-icon>Rôles</a>
                 </li>
-                <li class='icon' style='--i:2;--clr:#1877f2'>
+                <li class='icon' style='--i:2;--'>
                     <a class='iconContent' href='index.php?action=listActeurs'><ion-icon name='star-outline' ></ion-icon>Acteurs</a>
                 </li>
-                <li class='icon' style='--i:3;--clr:#1877f2'>
+                <li class='icon' style='--i:3;--'>
                     <a class='iconContent' href='index.php?action=listFilms'><ion-icon name='film-outline'></ion-icon>Films</a>
                 </li>
-                <li class='icon' id='iconReal' style='--i:4;--clr:#1877f2'>
+                <li class='icon' id='iconReal' style='--i:4;--'>
                     <a class='iconContent' href='index.php?action=listRealisateurs'><ion-icon name='videocam-outline'></ion-icon>Réalisateurs</a>
                 </li>
             </ul>
@@ -47,7 +47,7 @@
                     <a href='index.php?action=listFilms'>FILMS</a>
                     <a href='index.php?action=listActeurs'>ACTEURS</a>
                     <a href='index.php?action=listRealisateurs'>RÉALISATEURS</a>
-                    <a href='#'>RÔLES</a>
+                    <a href='index.php?action=roles'>RÔLES</a>
                 </ul>
             </mid>
             <right class='rightNav'>
