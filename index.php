@@ -24,11 +24,11 @@ if(isset($_GET["action"])) {
         case "roles" : $ctrlActeur->roles(); break;
         case "listFilmographieA" : $ctrlActeur->listFilmographieA($id); break;
         case "formActeur" : $ctrlActeur->formActeur($id); break;
-        case "UAActeur" : $ctrlActeur->UAActeur($id); break;
+        case "UActeur" : $ctrlActeur->UActeur($id); break;
         case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
         case "listFilmographieR" : $ctrlCinema->listFilmographieR($id); break;
         case "formRealisateur" : $ctrlCinema->formRealisateur($id); break;
-        case "UARealisateur" : $ctrlCinema->UARealisateur($id); break;
+        case "URealisateur" : $ctrlCinema->URealisateur($id); break;
         case "confirmation" : $ctrlCinema->confirmation(); break;
         case "casting" : $ctrlCinema->casting($id); break;
     }

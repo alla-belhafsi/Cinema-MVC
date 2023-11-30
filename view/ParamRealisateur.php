@@ -14,7 +14,7 @@ $showForm = true;
 
 $paramTitle = " Paramètres du réalisateur";
 
-$action = "UARealisateur";
+$action = "URealisateur";
 
 $value = $IR;
 

@@ -118,10 +118,6 @@
     flex-direction: column; 
     align-items: center; 
 }
-
-#iconMask {
-
-}
 .icon {
     width: 88px; 
     height: 88px; 
@@ -292,6 +288,22 @@
     transition: 1s;
 }
 .columna ion-icon:hover {
+    transform: scale(1.2);
+}
+.add p {
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+}
+.add ion-icon {
+    color: #C49C5F;
+    font-size: 1.4rem;
+    cursor: pointer;
+    margin-bottom: -2px;
+    margin-left: 5px;
+    transition: 1s;
+}
+.add ion-icon:hover {
     transform: scale(1.2);
 }
 .tableCenter {

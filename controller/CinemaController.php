@@ -155,11 +155,11 @@ class CinemaController {
     }
     
     // Modification ou ajout d'un réalisateur dans la BDD (UPDATE & ADD)
-    public function UARealisateur($id) {
+    public function URealisateur($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
     
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier'])) {
+        if (isset($_POST['modifier'])) {
             // Sanitize les données du formulaire avant de les utiliser
             $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);

@@ -13,9 +13,17 @@ $showIconMenu = false;
 
 $tabTitle = "Acteurs";
 
-$title = "<div class='title'>La liste des acteurs et actrices</div>";
+$title = "
+<div class='title'>La liste des acteurs et actrices</div>";
 
-$counter = "<p class= 'counter'> Il y a <b>".$requeteLA->rowCount()."</b> acteurs et actrices<br><br></p>";
+$counter = "
+<p class= 'counter'> Il y a <b>".$requeteLA->rowCount()."</b> acteurs et actrices<br></p>
+<div class= 'add'>
+    
+    <p>Ajouter un acteur ou une actrice <a href='index.php?action=AActeur&id=".$AActeur['id_acteur']."'> 
+        <ion-icon name='person-add-outline'></ion-icon>
+    </a></p><br><br>
+</div>";
 
 $list = "
 <table class='table'>

@@ -14,30 +14,37 @@
     </head>
     <body>
     
-    <?php if ($showForm) { ?>
-    <h1 class="title"><?= $paramTitle ?></h1><br>
-    <!-- Formulaire prérempli pour la modification -->
-    <form action="index.php?action=<?= $action ?>&id=<?= $id ?>" method="POST">
+        <?php if ($showForm) { ?>
+        <h1 class="title"><?= $paramTitle ?></h1><br>
+        <!-- Formulaire prérempli pour la modification -->
+        <form action="index.php?action=<?= $action ?>&id=<?= $id ?>" method="POST">
         
-        <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" value="<?= $value['prenom'] ?>"><br><br>
+            <label for="prenom">Prénom :
+                <input type="text" id="prenom" name="prenom" value="<?= $value['prenom'] ?>">
+            </label><br><br>
 
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" value="<?= $value['nom'] ?>"><br><br>
+            <label for="nom">Nom :
+                <input type="text" id="nom" name="nom" value="<?= $value['nom'] ?>">
+            </label><br><br>
         
-        <label for="dateNaissance">Date de naissance :</label>
-        <input type="date" id="dateNaissance" name="dateNaissance" value="<?= date('Y-m-d', strtotime($value['dateNaissance'])) ?>"><br><br>
+            <label for="dateNaissance">Date de naissance :
+                <input type="date" id="dateNaissance" name="dateNaissance" value="<?= date('Y-m-d', strtotime($value['dateNaissance'])) ?>">
+            </label><br><br>
         
-        <label for="sexe">Sexe :</label>
-        <input type="text" id="sexe" name="sexe" value="<?= $value['sexe'] ?>"><br><br>
+            <label for="sexe">Sexe :
+                <input type="text" id="sexe" name="sexe" value="<?= $value['sexe'] ?>">
+            </label><br><br>
+            
+            <label>
+                <input type="submit" name= "modifier" value="Modifier">
+            </label>
+
+            <label>
+                <input type="submit" name= "supprimer" value="Supprimer">
+            </label>
         
-        <input type="submit" name= "modifier" value="Modifier">
-        
-    </form>
-    
-    <input type="submit" name= "supprimer" value="Supprimer">
-    <?php } else { ?>
-        <?php } ?>
+        </form>        
+           <?php } ?>
         <?= $query ?>
         
         <?php

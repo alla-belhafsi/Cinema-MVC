@@ -14,7 +14,7 @@ $showForm = true;
 
 $paramTitle = " Paramètres de l'acteur";
 
-$action = "UAActeur";
+$action = "UActeur";
 
 $value = $IA;
 
