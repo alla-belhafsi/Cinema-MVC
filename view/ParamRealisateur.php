@@ -10,7 +10,9 @@
 
 <?php
 
-$showForm = true;
+$showFormFilled = true;
+
+$showFormBlank = false;
 
 $paramTitle = " Paramètres du réalisateur";
 

@@ -14,10 +14,10 @@
     </head>
     <body>
     
-        <?php if ($showForm) { ?>
+        <?php if ($showFormFilled) { ?>
         <h1 class="title"><?= $paramTitle ?></h1><br>
         <!-- Formulaire prérempli pour la modification -->
-        <form action="index.php?action=<?= $action ?>&id=<?= $id ?>" method="POST">
+        <form action="index.php?action=<?= $action ?>&id=<?= $_GET['id'] ?>" method="POST">
         
             <label for="prenom">Prénom :
                 <input type="text" id="prenom" name="prenom" value="<?= $value['prenom'] ?>">
@@ -44,12 +44,36 @@
             </label>
         
         </form>        
-           <?php } ?>
+           <?php } elseif ($showFormBlank) { ?>
+            <h1 class="title"><?= $paramTitle ?></h1><br>
+            <!-- Formulaire vide pour ajouter une personne (réalisateur ou acteur) -->
+            <form action="index.php?action=<?= $action ?>" method="POST">
+            
+                <label for="prenom">Prénom :
+                    <input type="text" id="prenom" name="prenom" value="">
+                </label><br><br>
+    
+                <label for="nom">Nom :
+                    <input type="text" id="nom" name="nom" value="">
+                </label><br><br>
+            
+                <label for="dateNaissance">Date de naissance :
+                    <input type="date" id="dateNaissance" name="dateNaissance" value="">
+                </label><br><br>
+            
+                <label for="sexe">Sexe :
+                    <input type="text" id="sexe" name="sexe" value="">
+                </label><br><br>
+                
+                <label>
+                    <input type="submit" name= "ajouter" value="Ajouter">
+                </label>
+            
+            </form>
+          <?php } ?>
         <?= $query ?>
         
         <?php
-        
-        $id = $_GET['id'];
         
         $showIconMenu = false;
         

@@ -20,7 +20,7 @@ $counter = "
 <p class= 'counter'> Il y a <b>".$requeteLA->rowCount()."</b> acteurs et actrices<br></p>
 <div class= 'add'>
     
-    <p>Ajouter un acteur ou une actrice <a href='index.php?action=AActeur&id=".$AActeur['id_acteur']."'> 
+    <p>Ajouter un acteur ou une actrice <a href='index.php?action=AActeur'> 
         <ion-icon name='person-add-outline'></ion-icon>
     </a></p><br><br>
 </div>";

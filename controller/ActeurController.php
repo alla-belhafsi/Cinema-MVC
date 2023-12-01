@@ -98,7 +98,7 @@ class ActeurController {
         require "view/ParamActeur.php";
     }
 
-    // Modification ou ajout d'un acteur dans la BDD (UPDATE & ADD)
+    // Modification d'un acteur dans la BDD (UPDATE)
     public function UActeur($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
@@ -136,5 +136,51 @@ class ActeurController {
         
         // Redirection vers la page des paramètres du réalisateur
         require "view/ParamActeur.php";
+    }
+
+    // Ajout d'un acteur dans la BDD (ADD)
+    public function AActeur() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        if (isset($_POST['ajouter'])) {
+            // Sanitize les données du formulaire avant de les utiliser
+            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance = filter_input(INPUT_POST, 'dateNaissance', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, 'sexe', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // Préparation de la requête SQL avec des paramètres nommés
+            $requeteAA = $pdo->prepare("
+            INSERT INTO personne (prenom, nom, dateNaissance, sexe)
+            VALUES (:prenom, :nom, :dateNaissance, :sexe)
+            ");
+
+            // Liaison des paramètres pour la requête et exécution
+            $requeteAA->bindParam('prenom', $prenom);
+            $requeteAA->bindParam('nom', $nom);
+            $requeteAA->bindParam('dateNaissance', $dateNaissance);
+            $requeteAA->bindParam('sexe', $sexe);
+            $requeteAA->execute();
+
+            // Récupération de l'ID généré automatiquement
+            $id_personne = $pdo->lastInsertId();
+
+            // Insertion dans la table 'acteur'
+            $requeteActeur = $pdo->prepare("
+                INSERT INTO acteur (id_personne)
+                VALUES (:id_personne)
+            ");
+
+            // Liaison du paramètre pour l'ID personne et exécution
+            $requeteActeur->bindParam('id_personne', $id_personne);
+            $requeteActeur->execute();
+    
+            // Redirection vers la page de confirmation
+            require "view/confirmation.php";
+        }
+        
+        // Redirection vers la page des paramètres du réalisateur
+        require "view/AddActeur.php";
     }
 }

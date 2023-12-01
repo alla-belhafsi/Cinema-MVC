@@ -7,17 +7,23 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <h1 class="title">Confirmation</h1>
-    <h2 class="title"><br><br>Les données ont été mises à jour avec succés.</h2>
 
 <?php
 
 $showFormFilled = false;
 
-$showFormBlank = false;
+$showFormBlank = true;
+
+$paramTitle = " Ajouter un acteur";
+
+$action = "AActeur";
+
+$value = "";
 
 $query = ob_get_clean();
-require_once "templateParam.php";
+require_once "templateParam.php"; 
+
 ?>
+
 </body>
 </html>
