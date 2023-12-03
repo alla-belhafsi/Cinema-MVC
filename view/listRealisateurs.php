@@ -46,6 +46,11 @@ foreach ($requeteLR->fetchAll() as $realisateur) {
                 <ion-icon name='settings-outline'></ion-icon>
             </a>
         </td>
+        <td class='tableCenterUD'>
+            <a class='columna' href='index.php?action=DRealisateur&id=".$realisateur['id_realisateur']."'>
+                <ion-icon name='trash-outline'></ion-icon>
+            </a>
+        </td>
     </tr>";
 }
 $list .= "

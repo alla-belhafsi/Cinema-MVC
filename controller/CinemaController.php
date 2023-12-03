@@ -154,7 +154,7 @@ class CinemaController {
         require "view/ParamRealisateur.php";
     }
     
-    // Modification ou ajout d'un réalisateur dans la BDD (UPDATE & ADD)
+    // Modification d'un réalisateur dans la BDD (UPDATE)
     public function URealisateur($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
@@ -194,11 +194,14 @@ class CinemaController {
         require "view/ParamRealisateur.php";
     }
 
-    // Modification ou ajout d'un réalisateur dans la BDD (UPDATE & ADD)
+    // Il faut mettre les deux actions dans une même function, pour pouvoir 
+    // pour pouvoir cliquer sur deux bouttons en même temps 
+    // Et vérifier avec le formateur pourquoi ce n'est pas conseiller de mettre deux actions ou plus dans une même function
+    // Supprimer un réalisateur dans la BDD (DELETE) [Option clé étrangère nullable]
     public function DRealisateur($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
-    
+
         // Récupération des données actuelles du réalisateur
         $requeteIR = $pdo->prepare("
         SELECT 
@@ -214,60 +217,38 @@ class CinemaController {
         $requeteIR->bindParam('id_realisateur', $id);
         $requeteIR->execute();
         $IR = $requeteIR->fetch();
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
-            // Vérifier avec le formateur, si mettre le réalisateur en default ou supprimer tout ce qui est relier au réalisateur (film, posseder:genre, casting, acteur, role et personne). Je me demandais si je ne devais pas proposer les deux options au moment du clic sur le bouton de suppression, offrant ainsi deux choix.
-
-            // Suppression des enregistrements liés avec la clé étrangère FK_acteur_personne dans la table acteur et personne
-
-            // Suppression des enregistrements liés avec la clé étrangère FK__acteur et FK__role dans la table casting
-
-            // Suppression des enregistrements liés avec la clé étrangère FK_casting_film dans la table casting
-            
-            // Suppression des enregistrements liés avec la clé étrangère FK__film dans la table posseder
-            $requeteDeletePosseder = $pdo->prepare("
-            DELETE 
-            FROM posseder
-            WHERE id_film IN (
-                SELECT id_film
-                FROM film
-            WHERE id_realisateur = :id_realisateur)
-            ");
-
-            // Liaison du paramètre et exécution de la requête de suppression des enregistrements liés
-            $requeteDeletePosseder->bindParam('id_realisateur', $id);
-            $requeteDeletePosseder->execute();
-
-            // Suppression des enregistrements liés avec la clé étrangère FK_film_realisateur dans la table film
-            $requeteDeleteFilms = $pdo->prepare("
-            DELETE FROM film
+    
+        if (isset($_POST['supprimer'])) {
+            $requeteSetNull = $pdo->prepare("
+            UPDATE film
+            SET id_realisateur = NULL
             WHERE id_realisateur = :id_realisateur
             ");
+            
+            // Liaison des paramètres pour la mise à jour
+            $requeteSetNull->bindParam('id_realisateur', $id);
+            $requeteSetNull->execute();
 
-            // Liaison du paramètre et exécution de la requête de suppression des films associés
-            $requeteDeleteFilms->bindParam('id_realisateur', $id);
-            $requeteDeleteFilms->execute();
-
-            // Suppression du réalisateur et des informations associées
-            $requeteDR = $pdo->prepare("
+            // Suppression du réalisateur dans la table realisateur
+            $requeteLastDel = $pdo->prepare("
             DELETE 
                 realisateur, 
                 personne 
             FROM realisateur
             INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-            WHERE realisateur.id_realisateur = :id_realisateur
+            WHERE id_realisateur = :id_realisateur
             ");
-    
-            // Liaison du paramètre et exécution de la requête de suppression
-            $requeteDR->bindParam('id_realisateur', $id);
-            $requeteDR->execute();
-    
+
+            // Liaison des paramètres pour la mise à jour 
+            $requeteLastDel->bindParam('id_realisateur', $id);
+            $requeteLastDel->execute();
+
             // Redirection vers la page de confirmation
             require "view/confirmation.php";
         }
 
-        // Redirection vers la page des paramètres du réalisateur
-        require "view/ParamRealisateur.php";
+       // Redirection vers la page des paramètres du réalisateur
+       require "view/DeleteRealisateur.php";
     }
 }
 

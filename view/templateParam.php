@@ -36,13 +36,10 @@
             </label><br><br>
             
             <label>
-                <input type="submit" name= "modifier" value="Modifier">
+                <?= $button ?>
+                
             </label>
-
-            <label>
-                <input type="submit" name= "supprimer" value="Supprimer">
-            </label>
-        
+            
         </form>        
            <?php } elseif ($showFormBlank) { ?>
             <h1 class="title"><?= $paramTitle ?></h1><br>
@@ -72,6 +69,7 @@
             </form>
           <?php } ?>
         <?= $query ?>
+        <script src="public/js/script.js"></script>
         
         <?php
         
@@ -83,7 +81,7 @@
         
         $counter = "";
         
-        $list = ""; 
+        $list = "";
 
         $query = ob_get_clean();
         require_once "template.php";

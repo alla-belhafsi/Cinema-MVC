@@ -14,13 +14,13 @@ $showFormFilled = true;
 
 $showFormBlank = false;
 
-$paramTitle = " Paramètres du réalisateur";
+$paramTitle = " Supprimer un acteur";
 
-$action = "URealisateur";
+$action = "DRealisateur";
 
 $value = $IR;
 
-$button = "<input type='submit' name= 'modifier' value='Modifier'>";
+$button = "<input type='submit' name= 'supprimer' value='Supprimer'>";
 
 $query = ob_get_clean();
 require_once "templateParam.php"; 
