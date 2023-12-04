@@ -24,8 +24,6 @@ function afficherEtoiles($note) {
     return $etoiles;
 }
 
-
-
 // Une fonction qui est arrondi pour afficher que des étoiles entièrement remplies ou vides
 
 // function afficherEtoiles($note) {

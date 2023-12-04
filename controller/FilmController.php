@@ -1,9 +1,9 @@
 <?php
 
-// un namespace permettant de catégoriser virtuellement (dans un espace de nom la classe en question)
+// Un namespace permettant de catégoriser virtuellement (dans un espace de nom la classe en question)
 namespace Controller;
 
-// 'utilisation du "use" pour accéder à la classe Connect
+// Utilisation du "use" pour accéder à la classe Connect
 use Model\Connect;
 
 class FilmController {
@@ -26,6 +26,7 @@ class FilmController {
         INNER JOIN personne ON realisateur.id_personne = personne.id_personne
         ORDER BY film.dateParution DESC;");
         
+        // Redirection vers la page de la liste des films
         require "view/listFilms.php";
     } 
 }

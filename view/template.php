@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $tabTitle ?></title> 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <title><?= $tabTitle ?></title>    
     
     <!-- Condition: Si c'est la page d'accueil alors afficher les icônes -->
     <?php if ($showIconMenu) { ?>
@@ -58,16 +58,9 @@
                 </ul>
             </right>    
         </nav>
-        <!-- Affichage du titre -->
-        <h1><?= $title ?></h1>
-        <!-- Affichage de combien d'éléments sont disponibles -->
-        <p><?= $counter ?></p>
-        <!-- Affichage de la liste des éléments -->
-        <div>
-            <?= $list ?>
-        </div>
         <?php } ?>
-        <?= $query ?>
+        
+        <?= $content ?>
     
     <script src="public/js/script.js"></script>
 </body>

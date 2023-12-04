@@ -1,9 +1,9 @@
 <?php
 
-// un namespace permettant de catégoriser virtuellement (dans un espace de nom la classe en question)
+// Un namespace permettant de catégoriser virtuellement (dans un espace de nom la classe en question)
 namespace Controller;
 
-// 'utilisation du "use" pour accéder à la classe Connect
+// Utilisation du "use" pour accéder à la classe Connect
 use Model\Connect;
 
 class ActeurController {
@@ -22,7 +22,8 @@ class ActeurController {
         FROM personne
         INNER JOIN acteur ON personne.id_personne = acteur.id_personne
         ORDER BY personne.dateNaissance DESC");
-
+        
+        // Redirection vers la page de la liste des acteurs
         require "view/listActeurs.php";
     }
 
@@ -42,7 +43,8 @@ class ActeurController {
         INNER JOIN personne ON acteur.id_personne = personne.id_personne
         INNER JOIN role ON casting.id_role = role.id_role
         ");
-
+        
+        // Redirection vers la page de la liste des rôles
         require "view/roles.php";
     }
 
@@ -65,12 +67,13 @@ class ActeurController {
         INNER JOIN role ON casting.id_role = role.id_role
         INNER JOIN film ON casting.id_film = film.id_film
         WHERE acteur.id_acteur = :id_acteur
-        ");// ne renvoie qu'une seule ligne
+        ");
 
-        // Liaison du paramètre :id_film et exécution de la requête
+        // Liaison du paramètre :id_acteur et exécution de la requête
         $requeteFGA->bindParam('id_acteur', $id);
         $requeteFGA->execute();
-
+        
+        // Redirection vers la page de la liste des films d'un acteur
         require "view/listFilmographieA.php";
     }
 
@@ -94,51 +97,11 @@ class ActeurController {
         $requeteIA->execute();
         $IA = $requeteIA->fetch();
 
-        // Redirection vers la page des paramètres du réalisateur
+        // Redirection vers la page du formulaire pré-rempli de l'acteur
         require "view/ParamActeur.php";
     }
 
-    // Modification d'un acteur dans la BDD (UPDATE)
-    public function UActeur($id) {
-        // On se connecte
-        $pdo = Connect::seConnecter();
-
-        if (isset($_POST['modifier'])) {
-            // Sanitize les données du formulaire avant de les utiliser
-            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $dateNaissance = filter_input(INPUT_POST, 'dateNaissance', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $sexe = filter_input(INPUT_POST, 'sexe', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-            // Exécution de la requête de mise à jour
-            $requeteUA = $pdo->prepare("
-            UPDATE personne
-            INNER JOIN acteur ON personne.id_personne = acteur.id_personne
-            SET 
-              prenom = :prenom, 
-              nom = :nom, 
-              dateNaissance = :dateNaissance,
-              sexe = :sexe
-            WHERE id_acteur = :id_acteur
-            ");
-
-            // Liaison des paramètres pour la mise à jour 
-            $requeteUA->bindParam('prenom', $prenom);
-            $requeteUA->bindParam('nom', $nom);
-            $requeteUA->bindParam('dateNaissance', $dateNaissance);
-            $requeteUA->bindParam('sexe', $sexe);
-            $requeteUA->bindParam('id_acteur', $id);
-            $requeteUA->execute();
-    
-            // Redirection vers la page de confirmation
-            require "view/confirmation.php";
-        }
-        
-        // Redirection vers la page des paramètres du réalisateur
-        require "view/ParamActeur.php";
-    }
-
-    // Ajout d'un acteur dans la BDD (ADD)
+    // Ajout d'un acteur et son identité (personne) dans la BDD (ADD)
     public function AActeur() {
         // On se connecte
         $pdo = Connect::seConnecter();
@@ -176,11 +139,87 @@ class ActeurController {
             $requeteActeur->bindParam('id_personne', $id_personne);
             $requeteActeur->execute();
     
+            // Redirection vers la page de confirmation de l'ajout
+            require "view/confirmation.php";
+        }
+        
+        // Redirection vers le formulaire vierge pour ajouter un Acteur
+        require "view/addActeur.php";
+    }
+
+    // Modification d'un acteur dans la BDD (UPDATE)
+    public function UActeur($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+        
+        if (isset($_POST['modifier'])) {
+            // Sanitize les données du formulaire avant de les utiliser
+            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance = filter_input(INPUT_POST, 'dateNaissance', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, 'sexe', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // Exécution de la requête de mise à jour
+            $requeteUA = $pdo->prepare("
+            UPDATE personne
+            INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+            SET 
+              prenom = :prenom, 
+              nom = :nom, 
+              dateNaissance = :dateNaissance,
+              sexe = :sexe
+            WHERE id_acteur = :id_acteur
+            ");
+
+            // Liaison des paramètres pour la mise à jour 
+            $requeteUA->bindParam('prenom', $prenom);
+            $requeteUA->bindParam('nom', $nom);
+            $requeteUA->bindParam('dateNaissance', $dateNaissance);
+            $requeteUA->bindParam('sexe', $sexe);
+            $requeteUA->bindParam('id_acteur', $id);
+            $requeteUA->execute();
+    
             // Redirection vers la page de confirmation
             require "view/confirmation.php";
         }
         
-        // Redirection vers la page des paramètres du réalisateur
-        require "view/AddActeur.php";
+        // Redirection vers la page du formulaire pré-rempli de l'acteur
+        require "view/ParamActeur.php";
+    }
+
+    public function DActeur($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // Suppression de l'acteur, de son rôle et de son film dans la table casting ainsi que du rôle, dans la table role
+        $requeteRoleCastDel = $pdo->prepare("
+        DELETE 
+            role,
+            casting
+        FROM casting
+        INNER JOIN role ON casting.id_role = role.id_role
+        WHERE id_acteur = :id_acteur
+        ");
+
+        // Liaison des paramètres pour la mise à jour 
+        $requeteRoleCastDel->bindParam('id_acteur', $id);
+        $requeteRoleCastDel->execute();
+
+        // Suppression de l'acteur dans la table acteur
+        $requeteFinalDel = $pdo->prepare("
+        DELETE 
+            acteur,
+            personne
+        FROM acteur
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        WHERE id_acteur = :id_acteur
+        ");
+
+        // Liaison des paramètres pour la mise à jour 
+        $requeteFinalDel->bindParam('id_acteur', $id);
+        $requeteFinalDel->execute();
+
+        // Redirection vers la page de confirmation de la suppression
+        require "view/confirmation.php";
     }
 }

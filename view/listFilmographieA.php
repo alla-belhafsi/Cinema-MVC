@@ -1,34 +1,27 @@
-<?php ob_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/style.css">
-</head>
-<body>
-    <?php foreach ($requeteFGA->fetchAll() as $castings) { ?>
+<?php 
+ob_start(); 
+
+$count = 0; // Initialisation du compteur
+?>
+
+    <?php foreach ($requeteFGA->fetchAll() as $film) { 
+        if ($count === 0) { ?> 
+        <!-- Vérifie si le compteur est à 0 (premier film) -->
+            <h1 class='title'>Filmographie de  <?= $film['acteur'] ?></h1>
+        <?php }
+        $count++; ?>
         <div class="content">
-            <h2><a class='columna' href='index.php?action=casting&id=<?= $castings['id_film'] ?>'><?= $castings['film'] ?></a></h2>
-            <p>Dans le rôle de <?= $castings['role'] ?></p>
-            <p>Année de sortie : <?= $castings['dateSortie'] ?><br><br></p>
+            <h2>
+                <a class='columna' href='index.php?action=casting&id=<?= $film['id_film'] ?>'><?= $film['film'] ?></a>
+            </h2>
+            <p>Dans le rôle de <?= $film['role'] ?></p>
+            <p>Année de sortie : <?= $film['dateSortie'] ?></p>
         </div>
     <?php } ?>   
 
 <?php
-          
-$showIconMenu = false;
-
+$content = ob_get_clean();
 $tabTitle = "Filmographie";
-
-$title = "<div class='title'>Filmographie de ".$castings['acteur']."</div>";
-
-$counter = "";
-
-$list = "";
-
-$query = ob_get_clean();
+$showIconMenu = false;
 require_once "template.php";
 ?>
-</body>
-</html>

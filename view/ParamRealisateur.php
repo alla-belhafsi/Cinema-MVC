@@ -1,31 +1,39 @@
-<?php ob_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/style.css">
-</head>
-<body>
-
-<?php
-
-$showFormFilled = true;
-
-$showFormBlank = false;
-
-$paramTitle = " Paramètres du réalisateur";
-
-$action = "URealisateur";
-
-$value = $IR;
-
-$button = "<input type='submit' name= 'modifier' value='Modifier'>";
-
-$query = ob_get_clean();
-require_once "templateParam.php"; 
-
+<?php 
+ob_start(); 
+$isAdd = true;
 ?>
 
-</body>
-</html>
+    <h1 class="title">Paramètres du réalisateur</h1><br>
+    <!-- Formulaire prérempli pour la modification d'un réalisateur(UPDATE)-->
+    <form action="index.php?action=<?= $isAdd ? 'A' : 'U' ?>Realisateur&id=<?= $id ?>" method="POST">
+        
+        <label for="prenom">Prénom :
+            <input type="text" id="prenom" name="prenom" value="<?= $IR['prenom'] ?>">
+        </label>
+
+        <label for="nom">Nom :
+            <input type="text" id="nom" name="nom" value="<?= $IR['nom'] ?>">
+        </label>
+        
+        <label for="dateNaissance">Date de naissance :
+            <input type="date" id="dateNaissance" name="dateNaissance" value="<?= date('Y-m-d', strtotime($IR['dateNaissance'])) ?>">
+        </label>
+        
+        <label for="sexe">Sexe :
+            <input type="text" id="sexe" name="sexe" value="<?= $IR['sexe'] ?>">
+        </label>
+            
+        <label>
+            <input type='submit' name= 'modifier' value='Modifier'>   
+        </label>
+
+         <!--button type="submit"><?= '' // $isAdd ? 'Créer ce réalisateur' : 'Mettre à jour ce réalisateur' ?></button-->
+        <button type="submit">Enregistrer</button>
+            
+    </form> 
+
+<?php
+$content = ob_get_clean();
+$tabTitle = "Paramètres du réalisateur";
+require_once "templateParam.php";
+?>

@@ -1,47 +1,35 @@
-<?php ob_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/style.css">
-</head>
-<body>
 <?php
+ob_start();
+?>
 
-$showIconMenu = false;
+    <h1 class='title'>La liste des Films</h1>
 
-$tabTitle = "Films";
+    <p class= 'counter'> Il y a <b><?= $requeteLF->rowCount() ?></b> Films</p>
 
-$title = "<div class='title'>La liste des Films</div>";
-
-$counter = "<p class= 'counter'> Il y a <b>".$requeteLF->rowCount()."</b> Films<br><br></p>";
-
-$list = "
-<table class='table'>
-    <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Réalisateur</th>
-            <th>Durée</th>
-            <th>Date de Sortie</th>
-        </tr>
-    </thead>
-    <tbody>";
-        foreach ($requeteLF->fetchAll() as $film) { 
-            $list .= "
+    <table class='table'>
+        <thead>
             <tr>
-                <td class='column' id='selectCase'><a class='columna' href='index.php?action=casting&id=".$film['id_film']."'>".$film['titre']."</a><br></td>
-                <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographieR&id=".$film['id_realisateur']."'>".$film['realisateur']."</a><br></td>
-                <td class='tableCenter'>".$film['dureeHeure']."</td>
-                <td class='tableCenter'>".$film['dateSortie']."</td>
-            </tr>";
-        }
-$list .= "</tbody>
-</table>";
+                <th>Titre</th>
+                <th>Réalisateur</th>
+                <th>Durée</th>
+                <th>Date de Sortie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($requeteLF->fetchAll() as $film) { ?>
+                <tr>
+                    <td class='column' id='selectCase'><a class='columna' href='index.php?action=casting&id=<?= $film['id_film'] ?>'><?= $film['titre'] ?></a></td>
+                    <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographieR&id=<?= $film['id_realisateur'] ?>'><?= $film['realisateur'] ?></a></td>
+                    <td class='tableCenter'><?= $film['dureeHeure'] ?></td>
+                    <td class='tableCenter'><?= $film['dateSortie'] ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 
-$query = ob_get_clean();
+<?php
+$content = ob_get_clean();
+$tabTitle = "Films";
+$showIconMenu = false;
 require_once "template.php";
 ?>
-</body>
-</html>

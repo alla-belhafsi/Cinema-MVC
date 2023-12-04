@@ -1,36 +1,27 @@
-<?php ob_start(); 
-
-$FGR = $requeteFGR->fetchAll(); // Stocker les détails des films dans une variable séparée
+<?php 
+ob_start(); 
+$count = 0; // Initialisation du compteur
 ?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="public/css/style.css">
-    </head>
-    <body>
-        <?php foreach ($FGR as $films) { ?>
-            <div class="content">
-                <h2><a class='columna' href='index.php?action=casting&id=<?= $films['id_film'] ?>'><?= $films['film'] ?></a></h2>
-                <p>Genre : <?= $films['genres'] ?></p>
-                <p>Durée : <?= $films['dureeFilm'] ?></p>
-                <p>Année de sortie : <?= $films['dateSortie'] ?></p>
-            </div>
-        <?php } ?>
+
+    <?php foreach ($requeteFGR->fetchAll() as $film) { 
+        if ($count === 0) { ?> 
+        <!-- Vérifie si le compteur est à 0 (premier film) -->
+            <h1 class='title'>Filmographie de  <?= $film['realisateur'] ?></h1>
+        <?php }
+        $count++; ?>
+        <div class="content">
+            <h2>
+                <a class='columna' href='index.php?action=casting&id=<?= $film['id_film'] ?>'><?= $film['film'] ?></a>
+            </h2>
+            <p>Genre : <?= $film['genres'] ?></p>
+            <p>Durée : <?= $film['dureeFilm'] ?></p>
+            <p>Année de sortie : <?= $film['dateSortie'] ?></p>
+        </div>
+    <?php } ?>
+
 <?php
-$showIconMenu = false;
-
+$content = ob_get_clean();
 $tabTitle = "Filmographie";
-
-$title = "<div class='title'>Filmographie de ".$films['realisateur']."</div>";
-
-$counter = "";
-
-$list = "";
-
-$query = ob_get_clean();
+$showIconMenu = false;
 require_once "template.php";
 ?>
-</body>
-</html>
