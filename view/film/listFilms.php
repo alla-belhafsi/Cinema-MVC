@@ -1,11 +1,14 @@
 <?php
 ob_start();
 ?>
-
-    <h1 class='title'>La liste des Films</h1>
-
-    <p class= 'counter'> Il y a <b><?= $requeteLF->rowCount() ?></b> Films</p>
-
+    <div class='listHeader'>
+        <div>
+            <h1 class='title'>La liste des Films</h1>
+        </div>
+        <div>
+            <p class= 'counter'> Il y a <b><?= $requeteLF->rowCount() ?></b> Films</p>
+        </div>
+    </div>
     <table class='table'>
         <thead>
             <tr>

@@ -6,19 +6,19 @@ ob_start();
     <!-- Formulaire vierge pour ajouter une personne (réalisateur ou acteur) -->
     <form class='formular' action="index.php?action=AActeur" method="POST">
         
-        <label for="prenom">Prénom 
+        <label for="prenom">Prénom
             <input type="text" id="prenom" name="prenom" value="">
         </label>
 
-         <label for="nom">Nom 
+         <label for="nom">Nom
             <input type="text" id="nom" name="nom" value="">
         </label>
             
-         <label for="dateNaissance">Date de naissance 
+         <label for="dateNaissance">Date de naissance
             <input type="date" id="dateNaissance" name="dateNaissance" value="">
         </label>
         
-        <label for="sexe">Sexe 
+        <label for="sexe">Sexe
             <input type="text" id="sexe" name="sexe" value="">
         </label>
                 

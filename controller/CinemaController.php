@@ -14,16 +14,17 @@ class CinemaController {
 
         // On exécute la requête
         $requeteLR = $pdo->query("
-        SELECT DISTINCT
+        SELECT 
             realisateur.id_realisateur,
             CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
             personne.dateNaissance AS dateNaissance,
             personne.sexe
-            FROM realisateur
-            INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+            FROM personne
+            INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
             ORDER BY personne.dateNaissance DESC
         ");
-            
+        
+        // Redirection vers la page de la liste des réalisateurs
         require "view/realisateur/listRealisateurs.php";
     }
 
@@ -155,17 +156,17 @@ class CinemaController {
             $sexe = filter_input(INPUT_POST, 'sexe', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             // Préparation de la requête SQL avec des paramètres nommés
-            $requeteAR = $pdo->prepare("
+            $requeteAReal = $pdo->prepare("
             INSERT INTO personne (prenom, nom, dateNaissance, sexe)
             VALUES (:prenom, :nom, :dateNaissance, :sexe)
             ");
 
             // Liaison des paramètres pour la requête et éxecution
-            $requeteAR->bindParam('prenom', $prenom);
-            $requeteAR->bindParam('nom', $nom);
-            $requeteAR->bindParam('dateNaissance', $dateNaissance);
-            $requeteAR->bindParam('sexe', $sexe);
-            $requeteAR->execute();
+            $requeteAReal->bindParam('prenom', $prenom);
+            $requeteAReal->bindParam('nom', $nom);
+            $requeteAReal->bindParam('dateNaissance', $dateNaissance);
+            $requeteAReal->bindParam('sexe', $sexe);
+            $requeteAReal->execute();
 
             // Récupération de l'ID généré automatiquement (AUTO_INCREMENT)
             $id_personne = $pdo->lastInsertId();

@@ -27,27 +27,6 @@ class ActeurController {
         require "view/acteur/listActeurs.php";
     }
 
-    // Lister les rôles
-    public function roles() {
-        // On se connecte
-        $pdo = Connect::seConnecter();
-
-        // On exécute la requête
-        $requeteRA = $pdo->query("
-        SELECT DISTINCT
-            acteur.id_acteur AS id_acteur, 
-            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
-            role.nom AS role
-        FROM casting
-        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
-        INNER JOIN personne ON acteur.id_personne = personne.id_personne
-        INNER JOIN role ON casting.id_role = role.id_role
-        ");
-        
-        // Redirection vers la page de la liste des rôles
-        require "view/acteur/roles.php";
-    }
-
     // Lister les filmographies
     public function listFilmographieA($id) {
         // On se connecte
@@ -221,5 +200,97 @@ class ActeurController {
 
         // Redirection vers la page de confirmation de la suppression
         require "view/confirmation/confirmation.php";
+    }
+
+    // Lister les rôles
+    public function roles() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On exécute la requête
+        $requeteRA = $pdo->query("
+        SELECT DISTINCT
+            acteur.id_acteur AS id_acteur, 
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+            role.nom AS role
+        FROM casting
+        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        INNER JOIN role ON casting.id_role = role.id_role
+        ");
+        
+        // Redirection vers la page de la liste des rôles
+        require "view/acteur/roles.php";
+    }
+
+    // Ajout d'un rôle, le relier à son acteur et à son film
+    public function ARole() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+        
+        // On exécute une première requête
+        $listActs = $pdo->query("
+        SELECT
+            acteur.id_acteur AS id_acteur,
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur
+        FROM acteur
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        ");
+
+        // On exécute une deuxième requête
+        $listFilms = $pdo->query("
+        SELECT
+            film.id_film AS id_film,
+            film.titre AS film
+        FROM film
+        ");
+
+        if (isset($_POST['ajouter'])) {
+            // Sanitize les données du formulaire avant de les utiliser
+            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
+
+            // Vérification si les champs requis sont vides
+            if (!empty($nom)) {
+                // Sanitize les données du formulaire avant de les utiliser
+                $id_acteur = filter_input(INPUT_POST, 'acteur', FILTER_SANITIZE_NUMBER_INT);
+                $film = filter_input(INPUT_POST, 'film', FILTER_SANITIZE_STRING);
+
+                // Récupération des valeurs du formulaire
+                $nom = $_POST['nom'];
+                $id_acteur = $_POST['acteur'];
+                $film = $_POST['film'];
+
+                // Préparation de la requête SQL avec des paramètres nommés
+                $requeteAddRole = $pdo->prepare("
+                INSERT INTO role (nom)
+                VALUES (:nom)
+                ");
+
+                // Liaison des paramètres pour la requête et exécution
+                $requeteAddRole->bindParam('nom', $nom);
+                $requeteAddRole->execute();
+            } 
+
+            // Récupération de l'ID généré automatiquement (AUTO_INCREMENT)
+            $id_role = $pdo->lastInsertId();
+
+            // Insertion dans la table 'casting'
+            $requeteAttrRole = $pdo->prepare("
+            INSERT INTO casting (id_role, id_acteur, id_film)
+            VALUES (:id_role, :id_acteur, :id_film)
+            ");
+
+            // Liaison des paramètres pour la requête et exécution
+            $requeteAttrRole->bindParam('id_role', $id_role);
+            $requeteAttrRole->bindParam('id_acteur', $id_acteur);
+            $requeteAttrRole->bindParam('id_film', $film);
+            $requeteAttrRole->execute();
+
+            // Redirection vers le formulaire vierge pour ajouter un Rôle
+            require "view/confirmation/confirmation.php";
+        }
+
+        // Redirection vers le formulaire vierge pour ajouter un Rôle et le relier avec l'acteur et le film souhaité
+        require "view/acteur/addRole.php";
     }
 }

@@ -7,9 +7,6 @@
     font-family: "Agbalumo", sans-serif;    
 }
 
-.container2 {
-    background-color: #741717;
-}
 .home-background {
     position: relative;
     width: 100%;
@@ -61,20 +58,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-.formular {
-    margin-top: 10px;
-}
-.formular label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-.formular label input {
-    text-align: center;
-    margin-top: 3px;
 }
 
 /*==============================NAVBAR================================*/
@@ -304,11 +287,6 @@
 .columna ion-icon:hover {
     transform: scale(1.2);
 }
-.add p {
-    text-align: center;
-    text-decoration: none;
-    color: #000;
-}
 .add ion-icon {
     color: #C49C5F;
     font-size: 1.4rem;
@@ -332,8 +310,31 @@
 }
 
 
+/*================================Formular & List========================================*/
 
-
+.listHeader {
+    margin-bottom: 20px;
+    text-align: center;
+    text-decoration: none;
+    /* color: #000; */
+}
+.formular {
+    margin-top: 10px;
+}
+.formular label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.formular label input {
+    text-align: center;
+    margin-top: 3px;
+}
+.champ-a-corriger {
+    background-color: #ffcccc;
+}
 
 /*================================CASTING========================================*/
 

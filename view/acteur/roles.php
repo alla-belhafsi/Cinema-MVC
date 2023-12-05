@@ -2,10 +2,21 @@
 ob_start(); 
 ?>
 
-    <h1 class='title'>La liste des rôles</h1>
-
-    <p class= 'counter'> Il y a <b><?= $requeteRA->rowCount() ?></b> rôles</p>";
-
+    <div class='listHeader'>
+        <div>
+            <h1 class='title'>La liste des rôles</h1>
+        </div>
+        <div>
+            <p class= 'counter'> Il y a <b><?= $requeteRA->rowCount() ?></b> rôles</p>
+        </div>
+        <div class= 'add'>
+            <p>Ajouter un rôle
+                <a href='index.php?action=ARole'> 
+                    <ion-icon name='person-add-outline'></ion-icon>
+                </a>
+            </p>
+        </div>
+    </div>
     <table class='table'>
         <thead>
             <tr>
