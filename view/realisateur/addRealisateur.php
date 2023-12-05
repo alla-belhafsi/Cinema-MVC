@@ -4,7 +4,7 @@ ob_start();
 
     <h1 class="title">Ajouter un nouveau réalisateur</h1>
     <!-- Formulaire vide pour ajouter une personne (réalisateur ou acteur) -->
-    <form action="index.php?action=ARealisateur" method="POST">
+    <form class='formular' action="index.php?action=ARealisateur" method="POST">
         
         <label for="prenom">Prénom :
             <input type="text" id="prenom" name="prenom" value="">
