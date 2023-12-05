@@ -35,5 +35,5 @@ $isAdd = true;
 <?php
 $content = ob_get_clean();
 $tabTitle = "Paramètres de l'acteur";
-require_once "templateParam.php";
+require_once "view/template/templateParam.php";
 ?>

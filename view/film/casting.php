@@ -1,4 +1,4 @@
-<?php require_once('functionNote.php'); 
+<?php require_once('view/functions/functionNote.php'); 
 ob_start(); 
 ?>
 
@@ -13,16 +13,19 @@ ob_start();
         <p>Année de sortie : <?= $casting['anneeSortie'] ?></p>
         <p>Note : <?= afficherEtoiles($casting['note']) ?></p>
     </div>
-        
-    <div class="content">
+    
+    <?php if ($roles) { // Vérifie si un résultat existe, alors afficher?>
+        <div class="content">
         <p>Acteur et son rôle :</p>
-         <?php foreach ($requeteRole as $role) { ?>
+        
+         <?php foreach ($roles as $role) { ?>
             <p>
                 <a class='columna' href='index.php?action=listFilmographieA&id=<?= $role['id_acteur'] ?>'><?= $role['acteur'] ?></a> dans le rôle de <?= $role['role'] ?>
             </p>
         <?php } ?>
-    </div>
-        
+        </div>
+    <?php } ?>   
+    
     <div class="contentSyn">
         <p>Synopsis :</p>
         <p><?= $casting['synopsis'] ?></p>
@@ -32,5 +35,5 @@ ob_start();
 $content = ob_get_clean();
 $tabTitle = "Films";
 $showIconMenu = false;
-require_once "template.php";
+require_once "view/template/template.php";
 ?>

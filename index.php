@@ -46,6 +46,6 @@ if(isset($_GET["action"])) {
     // Afficher le titre de l'onglet
     $tabTitle = "CINEFYLE";
     
-    require_once "view/template.php";
+    require_once "view/template/template.php";
 }
 ?>

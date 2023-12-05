@@ -27,6 +27,6 @@ class FilmController {
         ORDER BY film.dateParution DESC;");
         
         // Redirection vers la page de la liste des films
-        require "view/listFilms.php";
+        require "view/film/listFilms.php";
     } 
 }

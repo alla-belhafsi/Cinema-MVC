@@ -31,5 +31,5 @@ ob_start();
 $content = ob_get_clean();
 $tabTitle = "Rôles";
 $showIconMenu = false;
-require_once "template.php";
+require_once "view/template/template.php";
 ?>

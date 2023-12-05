@@ -49,5 +49,5 @@ ob_start();
 $content = ob_get_clean();
 $tabTitle = "Acteurs";
 $showIconMenu = false;
-require_once "template.php";
+require_once "view/template/template.php";
 ?>

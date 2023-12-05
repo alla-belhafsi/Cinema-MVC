@@ -7,5 +7,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-require_once "templateParam.php";
+require_once "view/template/templateParam.php";
 ?>

@@ -24,7 +24,7 @@ class ActeurController {
         ORDER BY personne.dateNaissance DESC");
         
         // Redirection vers la page de la liste des acteurs
-        require "view/listActeurs.php";
+        require "view/acteur/listActeurs.php";
     }
 
     // Lister les rôles
@@ -45,7 +45,7 @@ class ActeurController {
         ");
         
         // Redirection vers la page de la liste des rôles
-        require "view/roles.php";
+        require "view/acteur/roles.php";
     }
 
     // Lister les filmographies
@@ -74,7 +74,7 @@ class ActeurController {
         $requeteFGA->execute();
         
         // Redirection vers la page de la liste des films d'un acteur
-        require "view/listFilmographieA.php";
+        require "view/acteur/listFilmographieA.php";
     }
 
     public function formActeur($id) {
@@ -98,7 +98,7 @@ class ActeurController {
         $IA = $requeteIA->fetch();
 
         // Redirection vers la page du formulaire pré-rempli de l'acteur
-        require "view/ParamActeur.php";
+        require "view/acteur/ParamActeur.php";
     }
 
     // Ajout d'un acteur et son identité (personne) dans la BDD (ADD)
@@ -140,11 +140,11 @@ class ActeurController {
             $requeteActeur->execute();
     
             // Redirection vers la page de confirmation de l'ajout
-            require "view/confirmation.php";
+            require "view/confirmation/confirmation.php";
         }
         
         // Redirection vers le formulaire vierge pour ajouter un Acteur
-        require "view/addActeur.php";
+        require "view/acteur/addActeur.php";
     }
 
     // Modification d'un acteur dans la BDD (UPDATE)
@@ -180,11 +180,11 @@ class ActeurController {
             $requeteUA->execute();
     
             // Redirection vers la page de confirmation
-            require "view/confirmation.php";
+            require "view/confirmation/confirmation.php";
         }
         
         // Redirection vers la page du formulaire pré-rempli de l'acteur
-        require "view/ParamActeur.php";
+        require "view/acteur/ParamActeur.php";
     }
 
     public function DActeur($id) {
@@ -220,6 +220,6 @@ class ActeurController {
         $requeteFinalDel->execute();
 
         // Redirection vers la page de confirmation de la suppression
-        require "view/confirmation.php";
+        require "view/confirmation/confirmation.php";
     }
 }

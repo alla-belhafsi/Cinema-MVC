@@ -24,7 +24,7 @@ class CinemaController {
             ORDER BY personne.dateNaissance DESC
         ");
             
-        require "view/listRealisateurs.php";
+        require "view/realisateur/listRealisateurs.php";
     }
 
     public function casting($id) {
@@ -76,8 +76,11 @@ class CinemaController {
         $requeteRole->bindParam('id_film', $id);
         $requeteRole->execute();
 
+        // Récupération de tous les informations
+        $roles = $requeteRole->fetchAll();
+
         // Redirection vers la page du casting d'un film
-        require "view/casting.php";
+        require "view/film/casting.php";
     }
 
     // Lister les filmographies
@@ -112,7 +115,7 @@ class CinemaController {
         $requeteFGR->execute();
         
         // Redirection vers la page de la liste des films d'un réalisateur
-        require "view/listFilmographieR.php";
+        require "view/realisateur/listFilmographieR.php";
     }
 
     public function formRealisateur($id) {
@@ -136,7 +139,7 @@ class CinemaController {
         $IR = $requeteIR->fetch();
 
         // Redirection vers la page du formulaire pré-rempli du réalisateur
-        require "view/ParamRealisateur.php";
+        require "view/realisateur/ParamRealisateur.php";
     }
 
     // Ajout d'un réalisateur et son identité (personne) dans la BDD (ADD)
@@ -178,11 +181,11 @@ class CinemaController {
             $requeteRealisateur->execute();
 
             // Redirection vers la page de confirmation
-            require "view/confirmation.php";
+            require "view/confirmation/confirmation.php";
         }
 
         // Redirection vers le formulaire vierge pour ajouter un Réalisateur
-        require "view/addRealisateur.php";
+        require "view/realisateur/addRealisateur.php";
     }
     
     // Modification d'un réalisateur dans la BDD (UPDATE)
@@ -218,11 +221,11 @@ class CinemaController {
             $requeteUR->execute();
     
             // Redirection vers la page de confirmation
-            require "view/confirmation.php";
+            require "view/confirmation/confirmation.php";
         }
         
         // Redirection vers la page du formulaire pré-rempli du réalisateur
-        require "view/ParamRealisateur.php";
+        require "view/realisateur/ParamRealisateur.php";
     }
 
     // Quand projet touche à la fin, prévoir un DELETE ON CASCADE en option
@@ -256,6 +259,6 @@ class CinemaController {
         $requeteLastDel->execute();
 
         // Redirection vers la page de confirmation
-        require "view/confirmation.php";
+        require "view/confirmation/confirmation.php";
     }
 }

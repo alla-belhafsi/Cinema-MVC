@@ -2,9 +2,9 @@
 ob_start(); 
 ?>
 
-    <h1 class="title">Ajouter un nouveau réalisateur</h1>
-    <!-- Formulaire vide pour ajouter une personne (réalisateur ou acteur) -->
-    <form action="index.php?action=ARealisateur" method="POST">
+    <h1 class="title">Ajouter un nouveau acteur</h1>
+    <!-- Formulaire vierge pour ajouter une personne (réalisateur ou acteur) -->
+    <form action="index.php?action=AActeur" method="POST">
         
         <label for="prenom">Prénom :
             <input type="text" id="prenom" name="prenom" value="">
@@ -30,6 +30,6 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$tabTitle = "Ajouter un réalisateur";
-require_once "templateParam.php";
+$tabTitle = "Ajouter un acteur";
+require_once "view/template/templateParam.php";
 ?>
