@@ -102,3 +102,24 @@ document.querySelector('.fill-correctly').addEventListener('submit', function(ev
         filmField.classList.remove('champ-a-corriger');
     }
 });
+
+// Sélectionnez tous les textarea avec la classe "auto-resize"
+const textareas = document.querySelectorAll('.auto-resize');
+
+// Fonction pour redimensionner le textarea en fonction de son contenu
+function resizeTextarea() {
+    textareas.forEach((textarea) => {
+        textarea.style.height = 'auto'; // Réinitialise la hauteur à "auto"
+        textarea.style.height = textarea.scrollHeight + 'px'; // Ajuste la hauteur en fonction du contenu
+    });
+}
+
+// Appeler la fonction de redimensionnement lorsque le contenu du textarea change
+textareas.forEach((textarea) => {
+    textarea.addEventListener('input', resizeTextarea);
+});
+
+// Redimensionner les textarea initialement au chargement de la page
+window.addEventListener('load', () => {
+    resizeTextarea();
+});

@@ -207,7 +207,7 @@ class ActeurController {
     }
 
     // Lister les rôles
-    public function roles() {
+    public function listRoles() {
         // On se connecte
         $pdo = Connect::seConnecter();
         
@@ -228,7 +228,7 @@ class ActeurController {
         $listRoles = $requeteRA->fetchAll();
         
         // Redirection vers la page de la liste des rôles
-        require "view/acteur/roles.php";
+        require "view/acteur/listRoles.php";
     }
 
     public function formRole($id) {

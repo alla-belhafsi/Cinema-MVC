@@ -22,7 +22,7 @@
             </div>
             <ul class='menu-list'>
                 <li class='icon'  style='--i:1;--'>
-                    <a class='iconContent' href='index.php?action=roles'><ion-icon id='iconMask' class="fa-solid fa-masks-theater"></ion-icon>Rôles</a>
+                    <a class='iconContent' href='index.php?action=listRoles'><ion-icon id='iconMask' class="fa-solid fa-masks-theater"></ion-icon>Rôles</a>
                 </li>
                 <li class='icon' style='--i:2;--'>
                     <a class='iconContent' href='index.php?action=listActeurs'><ion-icon name='star-outline' ></ion-icon>Acteurs</a>
@@ -47,7 +47,7 @@
                     <a href='index.php?action=listFilms'>FILMS</a>
                     <a href='index.php?action=listActeurs'>ACTEURS</a>
                     <a href='index.php?action=listRealisateurs'>RÉALISATEURS</a>
-                    <a href='index.php?action=roles'>RÔLES</a>
+                    <a href='index.php?action=listRoles'>RÔLES</a>
                 </ul>
             </mid>
             <right class='rightNav'>

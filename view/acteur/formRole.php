@@ -4,6 +4,7 @@ ob_start();
 ?>
 
     <h1 class="title">Modifier le rôle de <?= $IRole['role'] ?></h1>
+    
     <!-- Formulaire pré-rempli pour modifier un rôle -->
     <form class='fill-correctly formular' action="index.php?action=URole&id=<?= $id ?>" method="POST">
         

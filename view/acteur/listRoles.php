@@ -27,21 +27,29 @@ ob_start();
         <tbody>
             <?php foreach ($listRoles as $roles) { ?>
                 <tr>
-                    <td class='column'><?= $roles['role'] ?></td>
+
+                    <td class='column'>
+                        <?= $roles['role'] ?>
+                    </td>
+
                     <td class='column' id='selectCase'>
-                        <a class='columna' href='index.php?action=listFilmographieA&id=<?= $roles['id_acteur'] ?>'><?= $roles['acteur'] ?>
+                        <a class='columna' href='index.php?action=listFilmographieA&id=<?= $roles['id_acteur'] ?>'>
+                            <?= $roles['acteur'] ?>
                         </a>
                     </td>
+
                     <td class='tableCenterUD'>
                         <a class='columna' href='index.php?action=formRole&id=<?= $roles['id_role'] ?>'>
                             <ion-icon name='settings-outline'></ion-icon>
                         </a>
                     </td>
+
                     <td class='tableCenterUD'>
                         <a class='delete-something columna' href='index.php?action=DRole&id=<?= $roles['id_role'] ?>'>
                             <ion-icon name='trash-outline'></ion-icon>
                         </a>
                     </td>
+                    
                 </tr>
             <?php } ?> 
         </tbody>

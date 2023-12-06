@@ -21,10 +21,39 @@ ob_start();
         <tbody>
             <?php foreach ($requeteLF->fetchAll() as $film) { ?>
                 <tr>
-                    <td class='column' id='selectCase'><a class='columna' href='index.php?action=casting&id=<?= $film['id_film'] ?>'><?= $film['titre'] ?></a></td>
-                    <td class='column' id='selectCase'><a class='columna' href='index.php?action=listFilmographieR&id=<?= $film['id_realisateur'] ?>'><?= $film['realisateur'] ?></a></td>
-                    <td class='tableCenter'><?= $film['dureeHeure'] ?></td>
-                    <td class='tableCenter'><?= $film['dateSortie'] ?></td>
+
+                    <td class='column' id='selectCase'>
+                        <a class='columna' href='index.php?action=casting&id=<?= $film['id_film'] ?>'>
+                            <?= $film['titre'] ?>
+                        </a>
+                    </td>
+
+                    <td class='column' id='selectCase'>
+                        <a class='columna' href='index.php?action=listFilmographieR&id=<?= $film['id_realisateur'] ?>'>
+                            <?= $film['realisateur'] ?>
+                        </a>
+                    </td>
+
+                    <td class='tableCenter'>
+                        <?= $film['dureeHeure'] ?>
+                    </td>
+
+                    <td class='tableCenter'>
+                        <?= $film['dateSortie'] ?>
+                    </td>
+
+                    <td class='tableCenterUD'>
+                        <a class='columna' href='index.php?action=formFilm&id=<?= $film['id_film'] ?>'>
+                            <ion-icon name='settings-outline'></ion-icon>
+                        </a>
+                    </td>
+
+                    <td class='tableCenterUD'>
+                        <a class='delete-something columna' href='index.php?action=DFilm&id=<?= $film['id_film'] ?>'>
+                            <ion-icon name='trash-outline'></ion-icon>
+                        </a>
+                    </td>
+
                 </tr>
             <?php } ?>
         </tbody>
