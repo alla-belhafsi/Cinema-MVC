@@ -15,19 +15,23 @@ ob_start();
         <label for="acteur">Acteur
             <select id="acteur" name="acteur">
                 <!-- Option par défaut -->
-                <option value="">Sélectionnez un acteur</option>
-                <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
                 <option value="<?= $IRole['id_acteur'] ?>"><?= $IRole['acteur'] ?></option>
+                <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
+                <?php foreach($Acts AS $Act) { ?>
+                <option value="<?= $Act['id_acteur'] ?>"><?= $Act['acteur'] ?></option>
+                <?php } ?>
             </select>
         </label>
-        
+
         <!-- Attribuer un film à ce role -->
         <label for="film">Film
             <select id="film" name="film">
                 <!-- Option par défaut -->
-                <option value="">Sélectionnez un film</option>
-                <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
                 <option value="<?= $IRole['id_film'] ?>"><?= $IRole['film'] ?></option>
+                <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
+                <?php foreach($Films AS $Film) {?>
+                <option value="<?= $Film['id_film'] ?>"><?= $Film['film'] ?></option>
+                <?php } ?>
             </select>
         </label>
             

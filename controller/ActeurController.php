@@ -72,8 +72,12 @@ class ActeurController {
         INNER JOIN acteur ON personne.id_personne = acteur.id_personne
         WHERE id_acteur = :id_acteur
         ");
+
+        // Liaison des paramètres pour la requête et exécution
         $requeteIA->bindParam('id_acteur', $id);
         $requeteIA->execute();
+
+        // Récupération de l'information
         $IA = $requeteIA->fetch();
 
         // Redirection vers la page du formulaire pré-rempli de l'acteur
@@ -206,14 +210,14 @@ class ActeurController {
     public function roles() {
         // On se connecte
         $pdo = Connect::seConnecter();
-
+        
         // On exécute la requête
         $requeteRA = $pdo->query("
         SELECT DISTINCT
-            acteur.id_acteur AS id_acteur, 
-            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
-            role.nom AS role,
-            role.id_role AS id_role
+        acteur.id_acteur AS id_acteur, 
+        CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+        role.nom AS role,
+        role.id_role AS id_role
         FROM casting
         INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
         INNER JOIN personne ON acteur.id_personne = personne.id_personne
@@ -227,6 +231,61 @@ class ActeurController {
         require "view/acteur/roles.php";
     }
 
+    public function formRole($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+    
+        // Récupération des données actuelles du rôle
+        $requeteIRole = $pdo->prepare("
+        SELECT 
+            film.titre AS film,
+            film.id_film AS id_film,
+            acteur.id_acteur AS id_acteur,
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
+            role.nom AS role,
+            role.id_role AS id_role
+        FROM casting
+        INNER JOIN film ON casting.id_film = film.id_film
+        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+        INNER JOIN role ON casting.id_role = role.id_role
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        WHERE role.id_role = :id_role
+        ");
+
+        // Liaison des paramètres pour la requête et exécution
+        $requeteIRole->bindParam('id_role', $id);
+        $requeteIRole->execute();
+
+        // Récupération de l'information
+        $IRole = $requeteIRole->fetch();
+
+        // Récupération des données actuelles des acteurs
+        $requeteIAct = $pdo->query("
+        SELECT
+            acteur.id_acteur AS id_acteur,
+            CONCAT(personne.prenom, ' ', personne.nom) AS acteur
+        FROM acteur
+        INNER JOIN personne on acteur.id_personne = personne.id_personne
+        ");
+
+        // Récupération de tous les informations
+        $Acts = $requeteIAct->fetchAll(); 
+
+        // Récuperation des données actuelles des films
+        $requeteIFilm = $pdo->query("
+        SELECT
+            film.titre AS film,
+            film.id_film AS id_film
+        FROM film
+        ");
+
+        // Récupération de tous les informations
+        $Films = $requeteIFilm->fetchAll();
+
+        // Redirection vers la page du formulaire pré-rempli du rôle
+        require "view/acteur/formRole.php";
+    }
+
     // Ajout d'un rôle, le relier à son acteur et à son film
     public function ARole() {
         // On se connecte
@@ -237,37 +296,37 @@ class ActeurController {
         SELECT
             acteur.id_acteur AS id_acteur,
             CONCAT(personne.prenom, ' ', personne.nom) AS acteur
-        FROM acteur
-        INNER JOIN personne ON acteur.id_personne = personne.id_personne
-        ");
-
-        // On exécute une deuxième requête
-        $listFilms = $pdo->query("
-        SELECT
+            FROM acteur
+            INNER JOIN personne ON acteur.id_personne = personne.id_personne
+            ");
+            
+            // On exécute une deuxième requête
+            $listFilms = $pdo->query("
+            SELECT
             film.id_film AS id_film,
             film.titre AS film
-        FROM film
-        ");
-
-        if (isset($_POST['ajouter'])) {
-            // Sanitize les données du formulaire avant de les utiliser
-            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-            // Vérification si les champs requis sont vides
-            if (!empty($nom)) {
+            FROM film
+            ");
+            
+            if (isset($_POST['ajouter'])) {
                 // Sanitize les données du formulaire avant de les utiliser
-                $id_acteur = filter_input(INPUT_POST, 'acteur', FILTER_SANITIZE_NUMBER_INT);
-                $film = filter_input(INPUT_POST, 'film', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-                // Récupération des valeurs du formulaire
-                $nom = $_POST['nom'];
-                $id_acteur = $_POST['acteur'];
-                $film = $_POST['film'];
-
-                // Préparation de la requête SQL avec des paramètres nommés
-                $requeteAddRole = $pdo->prepare("
-                INSERT INTO role (nom)
-                VALUES (:nom)
+                $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                
+                // Vérification si les champs requis sont vides
+                if (!empty($nom)) {
+                    // Sanitize les données du formulaire avant de les utiliser
+                    $id_acteur = filter_input(INPUT_POST, 'acteur', FILTER_SANITIZE_NUMBER_INT);
+                    $film = filter_input(INPUT_POST, 'film', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    
+                    // Récupération des valeurs du formulaire
+                    $nom = $_POST['nom'];
+                    $id_acteur = $_POST['acteur'];
+                    $film = $_POST['film'];
+                    
+                    // Préparation de la requête SQL avec des paramètres nommés
+                    $requeteAddRole = $pdo->prepare("
+                    INSERT INTO role (nom)
+                    VALUES (:nom)
                 ");
 
                 // Liaison des paramètres pour la requête et exécution
@@ -298,34 +357,6 @@ class ActeurController {
         require "view/acteur/addRole.php";
     }
 
-    public function formRole($id) {
-        // On se connecte
-        $pdo = Connect::seConnecter();
-    
-        // Récupération des données actuelles du rôle
-        $requeteIRole = $pdo->prepare("
-        SELECT 
-            film.titre AS film,
-            film.id_film AS id_film,
-            acteur.id_acteur AS id_acteur,
-            CONCAT(personne.prenom, ' ', personne.nom) AS acteur,
-            role.nom AS role,
-            role.id_role AS id_role
-        FROM casting
-        INNER JOIN film ON casting.id_film = film.id_film
-        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
-        INNER JOIN role ON casting.id_role = role.id_role
-        INNER JOIN personne ON acteur.id_personne = personne.id_personne
-        WHERE role.id_role = :id_role
-        ");
-        $requeteIRole->bindParam('id_role', $id);
-        $requeteIRole->execute();
-        $IRole = $requeteIRole->fetch();
-
-        // Redirection vers la page du formulaire pré-rempli du rôle
-        require "view/acteur/formRole.php";
-    }
-
     public function URole($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
@@ -333,6 +364,8 @@ class ActeurController {
         if (isset($_POST['modifier'])) {
             // Sanitize les données du formulaire avant de les utiliser
             $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $id_acteur = filter_input(INPUT_POST, 'acteur', FILTER_SANITIZE_NUMBER_INT);
+            $id_film = filter_input(INPUT_POST, 'film', FILTER_SANITIZE_NUMBER_INT);
 
             // Exécution de la première requête de mise à jour du rôle
             $requeteURole = $pdo->prepare("
@@ -345,6 +378,21 @@ class ActeurController {
             $requeteURole->bindParam('id_role', $id);
             $requeteURole->bindParam('nom', $nom);
             $requeteURole->execute();
+            
+            // Exécution de la deuxième requête de mise à jour de la table casting
+            $requeteUCast = $pdo->prepare("
+            UPDATE casting
+            SET  
+                casting.id_acteur = :id_acteur,
+                casting.id_film = :id_film
+            WHERE casting.id_role = :id_role
+            ");
+            
+            // Liaison des paramètres pour la mise à jour
+            $requeteUCast->bindParam('id_role', $id);
+            $requeteUCast->bindParam('id_acteur', $id_acteur);
+            $requeteUCast->bindParam('id_film', $id_film);
+            $requeteUCast->execute();
 
             // Redirection vers la page de confirmation
             require "view/confirmation/confirmation.php";
@@ -354,23 +402,3 @@ class ActeurController {
         require "view/acteur/formRole.php";
     }
 }
-
-// Liaison des paramètres pour la mise à jour
-// $requeteURole->bindParam('nom', $nom);
-// $requeteURole->execute();
-
-// Exécution de la deuxième requête de mise à jour de la table casting
-// $requeteUCast = $pdo->prepare("
-// UPDATE casting
-// SET 
-//     casting.id_role = :id_role, 
-//     casting.id_acteur = :id_acteur,
-//     casting.id_film = :id_film
-// WHERE role.id_role = :id_role
-// ");
-
-// Liaison des paramètres pour la mise à jour
-// $requeteUCast->bindParam('id_role', $id_role);
-// $requeteUCast->bindParam('id_acteur', $id_acteur);
-// $requeteUCast->bindParam('id_role', $id_role);
-// $requeteUCast->execute();

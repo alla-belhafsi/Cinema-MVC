@@ -53,7 +53,7 @@ class CinemaController {
         $requeteCasting->bindParam('id_film', $id);
         $requeteCasting->execute();
 
-        // Récupération des informations 
+        // Récupération de l'information 
         $casting = $requeteCasting->fetch();
 
         // On exécute la deuxième requête acteur et son role ==================
@@ -135,8 +135,12 @@ class CinemaController {
         INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
         WHERE id_realisateur = :id_realisateur
         ");
+
+        // Liaison des paramètres pour la requête et exécution
         $requeteIR->bindParam('id_realisateur', $id);
         $requeteIR->execute();
+
+        // Récupération de l'information
         $IR = $requeteIR->fetch();
 
         // Redirection vers la page du formulaire pré-rempli du réalisateur
