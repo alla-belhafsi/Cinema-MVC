@@ -40,7 +40,13 @@ document.querySelector('.fill-correctly').addEventListener('submit', function(ev
     var filmNotSelected = filmValue === ""; 
 
     // Message de confirmation initial
-    var confirmationMessage = "Effectuer les modifications requises :\n"; 
+    var confirmationMessage = "Effectuer les modifications requises :\n";
+    
+    // Supprimer toutes les classes 'champ-a-corriger' existantes avant de vérifier les erreurs
+    var fields = document.querySelectorAll('.champ-a-corriger');
+    fields.forEach(function(field) {
+        field.classList.remove('champ-a-corriger');
+    });
     
     // Vérifie s'il y a des caractères spéciaux dans 'inputValue'
     if (specialCharsDetected) {
@@ -66,10 +72,20 @@ document.querySelector('.fill-correctly').addEventListener('submit', function(ev
     
     // Si des erreurs sont détectées, affiche le message de confirmation dans une alerte
     if (specialCharsDetected || inputValue === "" || acteurNotSelected || filmNotSelected) {
-
-        // Ajoute une classe pour le style visuel rouge clair
-        acteurField.classList.add('champ-a-corriger');
-        filmField.classList.add('champ-a-corriger');
+        if (specialCharsDetected) {
+            document.getElementById('nom').classList.add('champ-a-corriger');
+        }
+        if (inputValue === "") {
+            document.getElementById('nom').classList.add('champ-a-corriger');
+        }
+        if (acteurNotSelected || filmNotSelected) {
+            if (acteurNotSelected) {
+                document.getElementById('acteur').classList.add('champ-a-corriger');
+            }
+            if (filmNotSelected) {
+                document.getElementById('film').classList.add('champ-a-corriger');
+            }
+        }
 
         // Affiche une alerte avec les messages d'erreur
         alert(confirmationMessage);
