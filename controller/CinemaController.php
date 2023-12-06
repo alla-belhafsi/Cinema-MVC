@@ -140,7 +140,7 @@ class CinemaController {
         $IR = $requeteIR->fetch();
 
         // Redirection vers la page du formulaire pré-rempli du réalisateur
-        require "view/realisateur/ParamRealisateur.php";
+        require "view/realisateur/formRealisateur.php";
     }
 
     // Ajout d'un réalisateur et son identité (personne) dans la BDD (ADD)
@@ -226,7 +226,7 @@ class CinemaController {
         }
         
         // Redirection vers la page du formulaire pré-rempli du réalisateur
-        require "view/realisateur/ParamRealisateur.php";
+        require "view/realisateur/formRealisateur.php";
     }
 
     // Quand projet touche à la fin, prévoir un DELETE ON CASCADE en option

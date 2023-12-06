@@ -1,13 +1,14 @@
 <?php 
 ob_start(); 
+// $isAdd = true;
 ?>
 
-    <h1 class="title">Ajouter un nouveau rôle</h1>
-    <!-- Formulaire vierge pour ajouter un rôle -->
-    <form class='fill-correctly formular' action="index.php?action=ARole" method="POST">
+    <h1 class="title">Modifier le rôle de <?= $IRole['role'] ?></h1>
+    <!-- Formulaire pré-rempli pour ajouter un rôle -->
+    <form class='fill-correctly formular' action="index.php?action=URole&id=<?= $id ?>" method="POST">
         
         <label for="nom">Rôle
-            <input type="text" id="nom" name="nom" value="">
+            <input type="text" id="nom" name="nom" value="<?= $IRole['role'] ?>">
         </label>
 
         <!-- Attribuer un acteur à ce role -->
@@ -16,9 +17,7 @@ ob_start();
                 <!-- Option par défaut -->
                 <option value="">Sélectionnez un acteur</option>
                 <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
-                <?php foreach ($listActs as $act) { ?>
-                    <option value="<?= $act['id_acteur'] ?>"><?= $act['acteur'] ?></option>
-                <?php } ?>
+                <option value="<?= $IRole['id_acteur'] ?>"><?= $IRole['acteur'] ?></option>
             </select>
         </label>
         
@@ -28,20 +27,18 @@ ob_start();
                 <!-- Option par défaut -->
                 <option value="">Sélectionnez un film</option>
                 <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
-                <?php foreach ($listFilms as $film) { ?>
-                    <option value="<?= $film['id_film'] ?>"><?= $film['film'] ?></option>
-                <?php } ?>
+                <option value="<?= $IRole['id_film'] ?>"><?= $IRole['film'] ?></option>
             </select>
         </label>
             
         <label>
-            <input type="submit" name= "ajouter" value="Ajouter">
+            <input type="submit" name= "modifier" value="Modifier">
         </label>
         
     </form>
 
 <?php
 $content = ob_get_clean();
-$tabTitle = "Ajouter un rôle";
+$tabTitle = "Paramètres du rôle";
 require_once "view/template/templateParam.php";
 ?>

@@ -23,7 +23,9 @@ if(isset($_GET["action"])) {
         case "listFilms" : $ctrlFilm->listFilms(); break;
         case "listActeurs" : $ctrlActeur->listActeurs(); break;
         case "roles" : $ctrlActeur->roles(); break;
+        case "formRole" : $ctrlActeur->formRole($id); break;
         case "ARole" : $ctrlActeur->ARole(); break;
+        case "URole" : $ctrlActeur->URole($id); break;
         case "listFilmographieA" : $ctrlActeur->listFilmographieA($id); break;
         case "formActeur" : $ctrlActeur->formActeur($id); break;
         case "AActeur" : $ctrlActeur->AActeur(); break;
