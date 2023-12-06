@@ -4,14 +4,14 @@ ob_start();
 ?>
 
     <h1 class="title">Modifier le rôle de <?= $IRole['role'] ?></h1>
-    <!-- Formulaire pré-rempli pour ajouter un rôle -->
+    <!-- Formulaire pré-rempli pour modifier un rôle -->
     <form class='fill-correctly formular' action="index.php?action=URole&id=<?= $id ?>" method="POST">
         
         <label for="nom">Rôle
             <input type="text" id="nom" name="nom" value="<?= $IRole['role'] ?>">
         </label>
 
-        <!-- Attribuer un acteur à ce role -->
+        <!-- Afficher l'acteur de ce role -->
         <label for="acteur">Acteur
             <select id="acteur" name="acteur">
 
@@ -33,7 +33,7 @@ ob_start();
             </select>
         </label>
 
-        <!-- Attribuer un film à ce role -->
+        <!-- Afficher le film de ce role -->
         <label for="film">Film
             <select id="film" name="film">
 
@@ -50,7 +50,7 @@ ob_start();
                     <option value="<?= $Film['id_film'] ?>">
                         <?= $Film['film'] ?>
                     </option>
-                    
+
                 <?php } ?>
             </select>
         </label>

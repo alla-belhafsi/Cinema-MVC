@@ -28,5 +28,11 @@ class FilmController {
         
         // Redirection vers la page de la liste des films
         require "view/film/listFilms.php";
-    } 
+    }
+
+    public function formFilm() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+        
+    }
 }
