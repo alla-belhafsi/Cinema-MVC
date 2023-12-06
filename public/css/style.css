@@ -423,4 +423,8 @@
     .synopsis-column textarea {
         margin-left: 10px;
     }
+    .form-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
