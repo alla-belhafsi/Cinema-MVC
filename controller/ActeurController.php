@@ -266,6 +266,7 @@ class ActeurController {
             CONCAT(personne.prenom, ' ', personne.nom) AS acteur
         FROM acteur
         INNER JOIN personne on acteur.id_personne = personne.id_personne
+        ORDER BY acteur ASC
         ");
 
         // Récupération de tous les informations
@@ -277,6 +278,7 @@ class ActeurController {
             film.titre AS film,
             film.id_film AS id_film
         FROM film
+        ORDER BY film ASC
         ");
 
         // Récupération de tous les informations
@@ -298,6 +300,7 @@ class ActeurController {
             CONCAT(personne.prenom, ' ', personne.nom) AS acteur
             FROM acteur
             INNER JOIN personne ON acteur.id_personne = personne.id_personne
+            ORDER BY acteur ASC
             ");
             
             // On exécute une deuxième requête
@@ -306,6 +309,7 @@ class ActeurController {
             film.id_film AS id_film,
             film.titre AS film
             FROM film
+            ORDER BY film ASC
             ");
             
             if (isset($_POST['ajouter'])) {
@@ -400,5 +404,27 @@ class ActeurController {
 
         // Redirection vers la page du formulaire pré-rempli du réalisateur
         require "view/acteur/formRole.php";
+    }
+
+    public function DRole ($id) {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // Suppression du rôle, de son acteur et de son film dans la table casting ainsi que du rôle, dans la table role
+        $requeteRoleCastDel = $pdo->prepare("
+        DELETE 
+            role,
+            casting
+        FROM casting
+        INNER JOIN role ON casting.id_role = role.id_role
+        WHERE casting.id_role = :id_role
+        ");
+
+        // Liaison des paramètres pour la mise à jour 
+        $requeteRoleCastDel->bindParam('id_role', $id);
+        $requeteRoleCastDel->execute();
+
+        // Redirection vers la page de confirmation
+        require "view/confirmation/confirmation.php";
     }
 }

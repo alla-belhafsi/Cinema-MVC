@@ -26,6 +26,7 @@ if(isset($_GET["action"])) {
         case "formRole" : $ctrlActeur->formRole($id); break;
         case "ARole" : $ctrlActeur->ARole(); break;
         case "URole" : $ctrlActeur->URole($id); break;
+        case "DRole" : $ctrlActeur->DRole($id); break;
         case "listFilmographieA" : $ctrlActeur->listFilmographieA($id); break;
         case "formActeur" : $ctrlActeur->formActeur($id); break;
         case "AActeur" : $ctrlActeur->AActeur(); break;

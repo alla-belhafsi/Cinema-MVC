@@ -14,11 +14,21 @@ ob_start();
         <!-- Attribuer un acteur à ce role -->
         <label for="acteur">Acteur
             <select id="acteur" name="acteur">
+
                 <!-- Option par défaut -->
-                <option value="<?= $IRole['id_acteur'] ?>"><?= $IRole['acteur'] ?></option>
-                <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
-                <?php foreach($Acts AS $Act) { ?>
-                <option value="<?= $Act['id_acteur'] ?>"><?= $Act['acteur'] ?></option>
+                <option value="<?= $IRole['id_acteur'] ?>">
+                    <?= $IRole['acteur'] ?>
+                </option>
+
+                <!-- Remplacez les valeurs statiques par les valeurs issues dela base de données -->
+                <?php foreach($Acts AS $Act)
+
+                    // Vérifie si l'acteur par défaut est présent dans la séléction pour ne pas l'afficher en double lors du déroulement de la liste
+                    if ($Act['id_acteur'] !== $IRole['id_acteur']) { ?>
+                        <option value="<?= $Act['id_acteur'] ?>">
+                            <?= $Act['acteur'] ?>
+                        </option>
+
                 <?php } ?>
             </select>
         </label>
@@ -26,11 +36,21 @@ ob_start();
         <!-- Attribuer un film à ce role -->
         <label for="film">Film
             <select id="film" name="film">
+
                 <!-- Option par défaut -->
-                <option value="<?= $IRole['id_film'] ?>"><?= $IRole['film'] ?></option>
+                <option value="<?= $IRole['id_film'] ?>">
+                    <?= $IRole['film'] ?>
+                </option>
+
                 <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
-                <?php foreach($Films AS $Film) {?>
-                <option value="<?= $Film['id_film'] ?>"><?= $Film['film'] ?></option>
+                <?php foreach($Films AS $Film)
+                   
+                    // Vérifie si le film par défaut est présent dans la séléction pour ne pas l'afficher en double lors du déroulement de la liste
+                    if($Film['id_film'] !== $IRole['id_film']) { ?>
+                    <option value="<?= $Film['id_film'] ?>">
+                        <?= $Film['film'] ?>
+                    </option>
+                    
                 <?php } ?>
             </select>
         </label>
