@@ -18,7 +18,9 @@
     <?php if ($showIconMenu) { ?>
         <div class='menu'>
             <div class='eye' id='toggle'>
-                <span href='#'><ion-icon name='eye-outline'></ion-icon></span>
+                <span href='#'>
+                    <ion-icon name='eye-outline'></ion-icon>
+                </span>
             </div>
             <ul class='menu-list'>
                 <li class='icon'  style='--i:1;--'>

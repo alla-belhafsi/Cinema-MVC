@@ -20,7 +20,7 @@ deleteSomethingElts.forEach(deleteSomethingElt =>
     })
 );
 
-// Sélectionne le formulaire et écoute l'événement de soumission
+// Sélectionne le formulaire rôle et écoute l'événement de soumission
 document.querySelector('.fill-correctly').addEventListener('submit', function(event) {
     // Récupère la valeur du champ 'nom'
     var inputValue = document.getElementById('nom').value;

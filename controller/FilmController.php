@@ -43,8 +43,8 @@ class FilmController {
             film.titre AS film,
             film.synopsis AS synopsis,
             CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
-            TIME_FORMAT(SEC_TO_TIME(film.durer*60),'%H:%i') AS duree,
-            DATE_FORMAT(film.dateParution, '%Y') AS dateSortie
+            film.durer AS durer,
+            film.dateParution AS dateParution
         FROM film
         INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
         INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -54,7 +54,7 @@ class FilmController {
         // Liaison des paramètres pour la requête et exécution
         $requeteIFilm->bindParam('id_film', $id);
         $requeteIFilm->execute();
-
+        
         // Récupération de l'information
         $IFilm = $requeteIFilm->fetch();
 
@@ -81,22 +81,35 @@ class FilmController {
 
         if (isset($_POST['modifier'])) {
             // Sanitize les données du formulaire avant de les utiliser
-            $film = filter_input(INPUT_POST, 'film', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $realisateur = filter_input(INPUT_POST, 'realisateur', FILTER_SANITIZE_NUMBER_INT);
+            $film = filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $durer = filter_input(INPUT_POST, 'durer', FILTER_SANITIZE_NUMBER_INT);
+            $dateParution = filter_input(INPUT_POST, 'dateParution', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $idRealisateur = filter_input(INPUT_POST, 'id_realisateur', FILTER_SANITIZE_NUMBER_INT);
+            $synopsis = filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            // Exécution de la requête de mise à jour
+            //var_dump($note);die;
+            // Exécution de la requête de mise à jour (ajouter update afficheFilm)
             $requeteUF = $pdo->prepare("
             UPDATE film
             SET
               titre = :titre,
-              id_realisateur = :id_realisateur
+              durer = :durer,
+              dateParution = :dateParution,
+              note = :note,
+              id_realisateur = :id_realisateur,
+              synopsis = :synopsis
             WHERE id_film = :id_film
             ");
 
             // Liaison des paramètres pour la mise à jour 
             $requeteUF->bindParam('id_film', $id);
-            $requeteUF->bindParam('titre', $titre);
-            $requeteUF->bindParam('id_realisateur', $realisateur);
+            $requeteUF->bindParam('titre', $film);
+            $requeteUF->bindParam('durer', $durer);
+            $requeteUF->bindParam('dateParution', $dateParution);
+            $requeteUF->bindParam('note', $note);
+            $requeteUF->bindParam('id_realisateur', $idRealisateur);
+            $requeteUF->bindParam('synopsis', $synopsis);
             $requeteUF->execute();
 
             // Redirection vers la page de confirmation
@@ -105,5 +118,22 @@ class FilmController {
 
         // Redirection vers la page du formulaire pré-rempli du film
         require "view/film/formFilm.php";
+    }
+
+    public function DFilm() {
+        // On se connecte 
+        $pdo = Connect::seConnecter();
+
+        // Suppression du film dans la table film ainsi que dans la table casting
+        $requeteRoleCastDel = $pdo->prepare("
+        DELETE 
+            film,
+            casting
+        FROM casting
+        INNER JOIN film ON casting.id_film = film.id_film
+        WHERE casting.id_film = :id_film
+        ");
+
+        // bind les paramètres
     }
 }

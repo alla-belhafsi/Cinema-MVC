@@ -97,7 +97,7 @@ class CinemaController {
             TIME_FORMAT(SEC_TO_TIME(film.durer*60),'%H:%i') AS dureeFilm,
             CONCAT(personne.prenom, ' ', personne.nom) AS realisateur,
             DATE_FORMAT(film.dateParution, '%Y') AS dateSortie,
-            GROUP_CONCAT(DISTINCT genres_film.libelle SEPARATOR ' - ') AS genres
+            GROUP_CONCAT(genres_film.libelle SEPARATOR ' - ') AS genres
         FROM film
         INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
         INNER JOIN personne ON realisateur.id_personne = personne.id_personne

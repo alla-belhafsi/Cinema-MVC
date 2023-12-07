@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Agbalumo", sans-serif;    
+    font-family: "Roboto";    
 }
 
 .home-background {
@@ -24,6 +24,7 @@
 
 .title {
     color: transparent;
+    font-family: "Agbalumo", sans-serif;
     -webkit-text-stroke: 0.47px #C49C5F; /* Contour des lettres */
     justify-content: center;
     align-items: center;
@@ -33,6 +34,7 @@
 }
 .titreHome {
     color: #741717;
+    font-family: "Agbalumo", sans-serif;
     -webkit-text-stroke: 0.47px #C49C5F; /* Contour des lettres de 2 px de couleur noire */
     justify-content: center;
     align-items: center;
@@ -75,12 +77,13 @@
     padding-top: 108px;
 }
 
+#toggle span ion-icon {
+    margin-bottom: -4px;
+}
 .eye {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 50%;
-    left: 50%;
     height: 60px;
     width: 60px;
     background-color: #741717;
@@ -91,7 +94,6 @@
     cursor: pointer;
     transition: 0.74s;
     mix-blend-mode: luminosity;
-    margin-bottom: -3px;
     z-index: 1;
 }
 .eye:hover {
@@ -104,7 +106,7 @@
 }
 .eye.active ~ .menu-list li {
     transform: rotate(calc(var(--i) * 90deg)) translate(140px) rotate(calc(-1 * var(--i) * 90deg)) rotate(720deg) scale(1.0); /* Transformation pour les icônes */
-    transform-origin: center center;
+    /* transform-origin: center center; */
 }
 
 .menu-list {
@@ -116,6 +118,7 @@
     align-items: center; 
 }
 .icon {
+    margin-left: 1px;
     width: 88px; 
     height: 88px; 
     border-radius: 50%; /* Forme circulaire */
@@ -138,7 +141,8 @@
 
 .iconContent {
     text-decoration: none;
-    color: #000; 
+    color: #000;
+    font-family: "Agbalumo", sans-serif; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,6 +194,7 @@
     margin: 0px 50px;
 }
 .navbar h1 a {
+    font-family: "Agbalumo", sans-serif;
     text-decoration: none;
     color: #C49C5F;
     opacity: 1;
@@ -208,6 +213,7 @@
     gap: 20px;
 }
 .midNav a {
+    font-family: "Agbalumo", sans-serif;
     text-decoration: none;
     cursor: pointer;
     color: #C49C5F;
@@ -393,8 +399,7 @@
     * {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-        font-family: "Agbalumo", sans-serif;    
+        box-sizing: border-box;    
     }
 
     .navbar {

@@ -5,29 +5,30 @@ ob_start();
     <h1 class="title">Modifier le film <?= $IFilm['film'] ?></h1>
 
     <!-- Formulaire pré-rempli pour modifier un film -->
-    <form class='fill-correctly formular' action="index.php?action=URole&id=<?= $id ?>" method="POST">
+    <form class='formular' action="index.php?action=UFilm&id=<?= $id ?>" method="POST">
         <div class="form-container">
             <div class="form-column">
 
-                <label for="nom">Film
-                    <input type="text" class="filmInput" id="nom" name="nom" value="<?= $IFilm['film'] ?>">
+                <label for="film">Film
+                    <input type="text" class="filmInput" id="film" name="titre" value="<?= $IFilm['film'] ?>">
                 </label>
-        
-                <label for="duree">Durée
-                    <input type="number" id="duree" name="duree" value="<?= $IFilm['duree'] ?>">
+                
+                <label for="durer">Durée (en minutes)
+                    <input type="number" id="durer" name="durer" value="<?= $IFilm['durer'] ?>">
                 </label>
         
                 <label for="sortie">Sortie
-                    <input type="date" id="sortie" name="sortie" value="<?= date('Y-m-d', strtotime($Film['sortie'])) ?>">
+                    <input type="date" id="dateParution" name="dateParution" value="<?= date('Y-m-d', strtotime($IFilm['dateParution'])) ?>">
                 </label>
-        
+                
+                <!-- Afficher la note en décimale grâce à step et délimiter le champ d'action avec min/max -->
                 <label for="note">Note
-                    <input type="float" id="note" name="note" value="<?= $IFilm['note'] ?>">
+                    <input type="number" step="0.1" min="0" max="5" id="note" name="note" value="<?= $IFilm['note'] ?>">
                 </label>
         
                 <!-- Afficher le réalisateur de ce film -->
                 <label  for="realisateur">Réalisateur
-                    <select class="realSelect" id="realisateur" name="realisateur">
+                    <select class="realSelect" id="realisateur" name="id_realisateur">
         
                         <!-- Option par défaut -->
                         <option value="<?= $IFilm['id_realisateur'] ?>">
@@ -58,8 +59,6 @@ ob_start();
             </div>
         </div>
         
-
-
         <label>
             <input class="buttonModif" type="submit" name= "modifier" value="Modifier">
         </label>
