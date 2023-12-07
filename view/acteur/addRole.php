@@ -15,10 +15,12 @@ ob_start();
             <select id="acteur" name="acteur">
                 <!-- Option par défaut -->
                 <option value="">Sélectionnez un acteur</option>
+
                 <!-- Remplacez les valeurs statiques par les valeurs issues de la base de données -->
                 <?php foreach ($listActs as $act) { ?>
                     <option value="<?= $act['id_acteur'] ?>"><?= $act['acteur'] ?></option>
                 <?php } ?>
+                
             </select>
         </label>
         

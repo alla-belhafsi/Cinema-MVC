@@ -75,6 +75,107 @@ class FilmController {
         require "view/film/formFilm.php";
     }
 
+    public function AFilm() {
+        // On se connecte
+        $pdo = Connect::seConnecter();
+
+        // On exécute une première requête
+        $listReals = $pdo->query("
+        SELECT
+            realisateur.id_realisateur AS id_realisateur,
+            CONCAT(personne.prenom, ' ', personne.nom) AS realisateur
+        FROM realisateur
+        INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+        ORDER BY realisateur ASC
+        ");
+
+        // On exécute une deuxième requête
+        $listGenres = $pdo->query("
+        SELECT
+            genre.id_genre AS id_genre,
+            genre.libelle AS genre
+        FROM genre
+        ORDER BY libelle ASC
+        ");
+
+        if (isset($_POST['ajouter'])) {
+            //Sanitize les données du formulaire avant de les utiliser
+            $id_realisateur = filter_input(INPUT_POST, 'realisateur', FILTER_SANITIZE_NUMBER_INT);
+            
+            // Vérification si les champs requis sont vides
+            if (!empty($film) && !empty($dateParution) && !empty($durer) && !empty($synopsis) && !empty($note) && !empty($afficheFilm)) {
+                // Sanitize les données du formulaire avant de les utiliser
+                $film = filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $dateParution = filter_input(INPUT_POST, 'dateParution', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $durer = filter_input(INPUT_POST, 'durer', FILTER_SANITIZE_NUMBER_INT);
+                $synopsis = filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                $afficheFilm = filter_input(INPUT_POST, 'afficheFilm', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                
+                // Récupération des valeurs du formulaire
+                $film = $_POST['titre'];
+                $dateParution = $_POST['dateParution'];
+                $durer = $_POST['durer'];
+                $synopsis = $_POST['synopsis'];
+                $note = $_POST['note'];
+                $afficheFilm = $_POST['afficheFilm'];
+                
+                // Préparation de la requête SQL avec des paramètres nommés
+                $requeteAddFilm = $pdo->prepare("
+                INSERT INTO film (titre, dateParution, durer, synopsis, note, afficheFilm)
+                VALUES (:titre, :dateParution, :durer, :synopsis, :note, :afficheFilm)
+                ");
+
+                // Liaison des paramètres pour l'ajout et son exécution
+                $requeteAddFilm->bindParam('titre', $film);
+                $requeteAddFilm->bindParam('dateParution', $dateParution);
+                $requeteAddFilm->bindParam('durer', $durer);
+                $requeteAddFilm->bindParam('synopsis', $synopsis);
+                $requeteAddFilm->bindParam('note', $note);
+                $requeteAddFilm->bindParam('afficheFilm', $afficheFilm);
+                $requeteAddFilm->execute();
+            }
+
+            // Récupération de l'ID généré automatiquement (AUTO_INCREMENT)
+            $id_film = $pdo->lastInsertId();
+
+            // Attribuer un réalisateur dans la table 'film' 
+            $requeteAttrReal = $pdo->prepare("
+            UPDATE film
+            SET id_realisateur = :id_realisateur
+            WHERE id_film = :id_film
+            ");
+
+            // Liaison des paramètres pour la mise à jour et son exécution
+            $requeteAttrReal->bindParam('id_film', $id_film);
+            $requeteAttrReal->bindParam('id_realisateur', $id_realisateur );
+            $requeteAttrReal->execute();
+
+            // Récupération de l'ID généré automatiquement (AUTO_INCREMENT)
+            $id_film = $pdo->lastInsertId();
+            
+            // Récupérer la valeur de id_genre du formulaire
+            $id_genre = filter_input(INPUT_POST, 'id_genre', FILTER_SANITIZE_NUMBER_INT);
+
+            // Attribuer un genre dans la table 'posseder'
+            $requeteAttrGenre = $pdo->prepare("
+            INSERT INTO posseder (id_film, id_genre)
+            VALUES (:id_film, :id_genre)
+            ");
+
+            // Liaison des paramètres pour l'ajout et son exécution
+            $requeteAttrGenre->bindParam('id_film', $id_film);
+            $requeteAttrGenre->bindParam('id_genre', $id_genre );
+            $requeteAttrGenre->execute();
+
+            // Redirection vers la page de confirmation
+            require "view/confirmation/confirmation.php";
+        }
+
+        // Redirection vers la page du formulaire pré-rempli du film
+        require "view/film/addFilm.php";
+    }
+
     public function UFilm($id) {
         // On se connecte
         $pdo = Connect::seConnecter();
@@ -102,7 +203,7 @@ class FilmController {
             WHERE id_film = :id_film
             ");
 
-            // Liaison des paramètres pour la mise à jour 
+            // Liaison des paramètres pour la mise à jour et son exécution
             $requeteUF->bindParam('id_film', $id);
             $requeteUF->bindParam('titre', $film);
             $requeteUF->bindParam('durer', $durer);
@@ -123,9 +224,20 @@ class FilmController {
     public function DFilm() {
         // On se connecte 
         $pdo = Connect::seConnecter();
+        // Suppression de genre dans la table posseder
+        $requeteGenre = $pdo->prepare("
+        DELETE
+            posseder
+        FROM posseder
+        WHERE genre.id_film = :id_film
+        ");
+
+        // Liaison des paramètres pour la suppression et son exécution
+        $requeteGenre->bindParam('id_film', $id);
+        $requeteGenre->execute();
 
         // Suppression du film dans la table film ainsi que dans la table casting
-        $requeteRoleCastDel = $pdo->prepare("
+        $requeteFilmCastDel = $pdo->prepare("
         DELETE 
             film,
             casting
@@ -134,6 +246,8 @@ class FilmController {
         WHERE casting.id_film = :id_film
         ");
 
-        // bind les paramètres
+        // Liaison des paramètres pour la suppression et son exécution
+        $requeteFilmCastDel->bindParam('id_film', $id);
+        $requeteFilmCastDel->execute();
     }
 }

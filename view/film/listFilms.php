@@ -8,6 +8,13 @@ ob_start();
         <div>
             <p class= 'counter'> Il y a <b><?= $requeteLF->rowCount() ?></b> Films</p>
         </div>
+        <div class= 'add'>
+            <p>Ajouter un film
+                <a href='index.php?action=AFilm'> 
+                    <ion-icon name='film-outline'></ion-icon>
+                </a>
+            </p>
+        </div>
     </div>
     <table class='table'>
         <thead>

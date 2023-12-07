@@ -67,6 +67,6 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$tabTitle = "Paramètres du rôle";
+$tabTitle = "Paramètres du film";
 require_once "view/template/templateParam.php";
 ?>

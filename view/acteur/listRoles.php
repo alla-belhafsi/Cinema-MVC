@@ -12,7 +12,7 @@ ob_start();
         <div class= 'add'>
             <p>Ajouter un rôle
                 <a href='index.php?action=ARole'> 
-                    <ion-icon name='person-add-outline'></ion-icon>
+                <ion-icon id='iconMask' class="fa-solid fa-masks-theater"></ion-icon>
                 </a>
             </p>
         </div>

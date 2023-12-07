@@ -12,7 +12,7 @@ ob_start();
         <div class= 'add'>
             <p>Ajouter un Réalisateur ou une Réalisatrice 
                 <a href='index.php?action=ARealisateur'> 
-                    <ion-icon name='person-add-outline'></ion-icon>
+                    <ion-icon name='videocam-outline'></ion-icon>
                 </a>
             </p>
         </div>

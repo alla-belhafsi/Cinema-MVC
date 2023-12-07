@@ -12,7 +12,7 @@ ob_start();
         <div class= 'add'>
             <p>Ajouter un acteur ou une actrice 
                 <a href='index.php?action=AActeur'> 
-                    <ion-icon name='person-add-outline'></ion-icon>
+                    <ion-icon name='star-outline' ></ion-icon>
                 </a>
             </p>
         </div>
