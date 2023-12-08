@@ -412,10 +412,7 @@ class ActeurController {
         // Suppression du rôle, de son acteur et de son film dans la table casting ainsi que du rôle, dans la table role
         $requeteRoleCastDel = $pdo->prepare("
         DELETE 
-            role,
-            casting
         FROM casting
-        INNER JOIN role ON casting.id_role = role.id_role
         WHERE casting.id_role = :id_role
         ");
 

@@ -221,33 +221,43 @@ class FilmController {
         require "view/film/formFilm.php";
     }
 
-    public function DFilm() {
+    public function DFilm($id) {
         // On se connecte 
         $pdo = Connect::seConnecter();
         // Suppression de genre dans la table posseder
         $requeteGenre = $pdo->prepare("
         DELETE
-            posseder
         FROM posseder
-        WHERE genre.id_film = :id_film
+        WHERE posseder.id_film = :id_film
         ");
 
         // Liaison des paramètres pour la suppression et son exécution
         $requeteGenre->bindParam('id_film', $id);
         $requeteGenre->execute();
 
-        // Suppression du film dans la table film ainsi que dans la table casting
-        $requeteFilmCastDel = $pdo->prepare("
-        DELETE 
-            film,
-            casting
+        // Suppression du film dans la table casting
+        $requeteCastDel = $pdo->prepare("
+        DELETE
         FROM casting
-        INNER JOIN film ON casting.id_film = film.id_film
         WHERE casting.id_film = :id_film
         ");
 
         // Liaison des paramètres pour la suppression et son exécution
-        $requeteFilmCastDel->bindParam('id_film', $id);
-        $requeteFilmCastDel->execute();
+        $requeteCastDel->bindParam('id_film', $id);
+        $requeteCastDel->execute();
+
+        // Suppression du film dans la table film
+        $requeteFilmDel = $pdo->prepare("
+        DELETE
+        FROM film
+        WHERE film.id_film = :id_film
+        ");
+
+        // Liaison des paramètres pour la suppression et son exécution
+        $requeteFilmDel->bindParam('id_film', $id);
+        $requeteFilmDel->execute();
+
+        // Redirection vers la page de confirmation
+        require "view/confirmation/confirmation.php";
     }
 }
